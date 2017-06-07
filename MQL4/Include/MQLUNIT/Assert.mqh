@@ -175,39 +175,39 @@ template <typename T>
 static string MQLUNIT_Assert::assertEquals(
     string message, T& expected, T& actual
 ) {
-  if (expected != actual) {
-      return  StringConcatenate(
-          message, ": expected:<", typename(expected), "#", &expected,
-          "> but was:<", typename(actual), "#", &actual, ">"
-      );
-  }
-  return NULL;
+    if (expected != actual) {
+        return  StringConcatenate(
+            message, ": expected:<", typename(expected), "#", &expected,
+            "> but was:<", typename(actual), "#", &actual, ">"
+        );
+    }
+    return NULL;
 }
 
 //-----------------------------------------------------------------------------
 
 template <typename T>
 static string MQLUNIT_Assert::assertNotNull(string message, T entity) {
-  return entity == NULL ? message : NULL;
+    return entity == NULL ? message : NULL;
 }
 
 //-----------------------------------------------------------------------------
 
 template <typename T>
 static string MQLUNIT_Assert::assertNull(string message, T entity) {
-  return entity != NULL ? message : NULL;
+    return entity != NULL ? message : NULL;
 }
 
 //-----------------------------------------------------------------------------
 
 static string MQLUNIT_Assert::assertTrue(string message, bool condition) {
-  return condition ? NULL : message;
+    return condition ? NULL : message;
 }
 
 //-----------------------------------------------------------------------------
 
 static string MQLUNIT_Assert::assertFalse(string message, bool condition) {
-  return condition ? message : NULL;
+    return condition ? message : NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -269,7 +269,7 @@ static string MQLUNIT_Assert::assertArrayElement(
 ) {
   if (expected != actual) {
       return StringConcatenate(
-          message, ": expected array[",IntegerToString(i), "]:<",
+          message, ": expected array[", IntegerToString(i), "]:<",
           typename(expected), "#", &expected, "> but was:<", typename(actual),
           "#", &actual, ">"
       );
