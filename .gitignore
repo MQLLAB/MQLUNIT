@@ -1,6 +1,8 @@
 DDE-Sample.xls
 Sounds
-config
+!config/
+config/*
+!config/test.ini
 history
 logs
 profiles
