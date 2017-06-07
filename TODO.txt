@@ -1,0 +1,7 @@
+* Implement decorator interface
+* Implement decorator for repeated test case
+* Implement decorator for common setUp() and tearDown()
+* Create an a test runner that produces JUnit compatible XML output
+* Make the build and test run in AppVeyor
+* Make documentation and website build run in TravisCI
+* Add AppVeyor setup instructions to the cookbook

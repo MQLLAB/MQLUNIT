@@ -1,0 +1,27 @@
+Enumeration values, function pointest and arrays of enumeration values
+or function pointers cannot be asserted for equality.
+
+Example 1:
+----------
+enum e { a, b, c, d };
+e e1 = a;
+e e2 = b;
+ASSERT_EQUALS("Enums must be equal", e1, e2); // this will not compile
+
+Example 2:
+----------
+int a(int a) { return a; };
+typedef int(*fp)(int);
+
+fp x = a;
+fp y = a;
+ASSERT_EQUALS("Pointers must be equal", x, y); // this will not compile
+
+Example 3:
+----------
+int a(int a) { return a; };
+typedef int(*fp)(int);
+
+fp x[1]; x[0] = a;
+fp y[1]; y[0] = a;
+ASSERT_EQUALS("Pointers must be equal", x, y); // this will not compile

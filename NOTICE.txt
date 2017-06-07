@@ -1,0 +1,5 @@
+MQLUNIT
+Copyright 2017 Eneset Group Trust
+
+This product includes software developed by Ding Li (https://github.com/dingmaotu/mql4-lib)
+and licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0).
