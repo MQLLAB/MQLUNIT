@@ -16,8 +16,8 @@ addons:
 
 before_install:
   - mkdir -p $HOME/local/bin
-  - wget -O - "http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz" | tar xz -C ${TMPDIR-/tmp} ${DOXYGEN_VERSION}/bin/doxygen
-  - mv ${TMPDIR-/tmp}/${DOXYGEN_VERSION}/bin/doxygen $HOME/local/bin/doxygen
+  - wget -O - "https://s3.amazonaws.com/mqllab/doxygen/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz" | tar xz -C ${TMPDIR-/tmp} doxygen-${DOXYGEN_VERSION}/bin/doxygen
+  - mv ${TMPDIR-/tmp}/doxygen-${DOXYGEN_VERSION}/bin/doxygen $HOME/local/bin/doxygen
 
 script:
   - doxygen --version
