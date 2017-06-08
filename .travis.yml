@@ -14,8 +14,7 @@ addons:
       - graphviz
 
 script:
-#  - cd docs
-  - doxygen --version
+  - doxygen docs/Doxyfile
 
 #deploy:
 #  provider: pages
