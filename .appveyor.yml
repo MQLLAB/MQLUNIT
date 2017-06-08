@@ -1,11 +1,11 @@
-install:
-  - appveyor-retry choco install doxygen.portable
-  - appveyor-retry choco install graphviz.portable
+#install:
+#  - appveyor-retry choco install doxygen.portable
+#  - appveyor-retry choco install graphviz.portable
 build_script:
   - echo "Build..."
 test_script:
   - echo "Test..."
-after_test:
-  - doxygen.exe --version
+#after_test:
+#  - doxygen.exe --version
 #on_finish:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

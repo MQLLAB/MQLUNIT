@@ -38,8 +38,9 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class Test runner that outputs results to the "Experts" log window of
+/// @brief Test runner that outputs results to the "Experts" log window of
 /// MetaTrader terminal.
+///
 /// Optionally can pop up an alert dialog with a list of test failures if any
 /// occure.
 /// @see MQLUNIT_TestRunner

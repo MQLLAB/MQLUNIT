@@ -23,3 +23,4 @@ MQL4/Scripts/*
 !MQL4/Scripts/MQLUNIT/
 *.ex4
 *.log
+docs/html/

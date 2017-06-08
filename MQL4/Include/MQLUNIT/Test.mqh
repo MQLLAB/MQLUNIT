@@ -33,9 +33,10 @@ class MQLUNIT_TestResult;
 
 //-----------------------------------------------------------------------------
 
-/// @class Base class for all tests.
-/// An @a MQLUNIT_Test can be run and collect its results.
-/// @see #MQLUNIT_TestResult
+/// @brief Base class for all tests.
+///
+/// An MQLUNIT_Test can be run and collect its results.
+/// @see MQLUNIT_TestResult
 class MQLUNIT_Test {
 private:
     const string _name;
@@ -57,7 +58,7 @@ public:
 
     /// @brief Runs the test.
     /// @param result : collects the results of executing a test
-    /// @see #MQLUNIT_TestResult
+    /// @see MQLUNIT_TestResult
     virtual void run(MQLUNIT_TestResult* result) = 0;
 
 private:    

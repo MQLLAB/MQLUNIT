@@ -34,7 +34,7 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class Base class for all test runners.
+/// @brief Base class for all test runners.
 /// @see MQLUNIT_TestListener
 class MQLUNIT_TestRunner : public MQLUNIT_TestListener {
 public:

@@ -39,9 +39,10 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class Test runner that outputs results to the text console.
+/// @brief Test runner that outputs results to the text console.
+///
 /// If the console is not visible, it gets allocated and displayed. In case
-/// the console exists, the runner attaches to it ro display test results.
+/// the console exists, the runner attaches to it to display test results.
 /// @see MQLUNIT_TestRunner
 class MQLUNIT_ConsoleTestRunner : public MQLUNIT_TestRunner {
 private:

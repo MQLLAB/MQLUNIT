@@ -37,7 +37,8 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class Test result collects the results of executing a test.
+/// @brief Test result collects the results of executing a test.
+///
 /// It is an instance of the Collecting Parameter pattern.
 /// @see MQLUNIT_TestListener
 class MQLUNIT_TestResult : public MQLUNIT_TestListener {

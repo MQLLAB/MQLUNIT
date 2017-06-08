@@ -34,7 +34,7 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class Record of a failed Test execution.
+/// @brief Record of a failed Test execution.
 class MQLUNIT_TestFailure {
 private:
     const MQLUNIT_Test* _test;

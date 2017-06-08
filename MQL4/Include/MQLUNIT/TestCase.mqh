@@ -34,14 +34,16 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class A test case defines the fixture to run multiple tests.
+/// @brief A test case defines the fixture to run multiple tests.
+///
 /// To define a test case:<br>
 /// 1) implement a subclass of MQLUNIT_TestCase<br>
 /// 2) define instance variables that store the state of the fixture<br>
-/// 3) initialize the fixture state by overriding @a setUp<br>
-/// 4) clean-up after a test by overriding @a tearDown<br>
+/// 3) initialize the fixture state by overriding MQLUNIT_TestCase::setUp<br>
+/// 4) clean-up after a test by overriding MQLUNIT_TestCase::tearDown<br>
+/// <br>
 /// Each test runs in its own fixture so there can be no side effects among
-/// test runs.<br>
+/// test runs.<br><br>
 /// For example:<br>
 /// @code
 /// class MathTest : public MQLUNIT_TestCase {
@@ -66,10 +68,14 @@
 /// @endcode
 /// The tests to be run can be collected into an @a MQLUNIT_TestSuite.<br>
 /// @code
+/// MyFirstTestCase  test1;
+/// MySecondTestCase test2;
+/// MyThirdTestCase  test3;
+///
 /// MQLUNIT_TestSuite suite;
-/// suite.addTest(new MyFirstTest());
-/// suite.addTest(new MySecondTest());
-/// suite.addTest(new MyThirdTest());
+/// suite.addTest(&test1);
+/// suite.addTest(&test2);
+/// suite.addTest(&test3);
 ///
 /// MQLUNIT_TerminalTestRunner runner;
 /// runner.run(&suite);

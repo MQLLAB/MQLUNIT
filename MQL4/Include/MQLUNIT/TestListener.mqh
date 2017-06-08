@@ -34,7 +34,7 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class A Listener for test progress.
+/// @brief A Listener for test progress.
 class MQLUNIT_TestListener {
 private:
     // copying of the interface is forbidden

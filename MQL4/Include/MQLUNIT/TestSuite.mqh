@@ -40,14 +40,20 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class  A MQLUNIT_TestSuite is a Composite of MQLUNIT_Test.
-/// It runs a collection of test cases.
-/// Example usage:
+/// @brief Runs a collection of test cases.
+///
+/// A MQLUNIT_TestSuite is a Composite of MQLUNIT_Test.<br>
+/// <br>
+/// Example usage:<br>
 /// @code
+/// MyFirstTestCase  test1;
+/// MySecondTestCase test2;
+/// MyThirdTestCase  test3;
+///
 /// MQLUNIT_TestSuite suite;
-/// suite.addTest(new MyFirstTestCase());
-/// suite.addTest(new MySecondTestCase());
-/// suite.addTest(new MyThirdTestCase());
+/// suite.addTest(&test1);
+/// suite.addTest(&test2);
+/// suite.addTest(&test3);
 ///
 /// MQLUNIT_TerminalTestRunner runner;
 /// runner.run(&suite);

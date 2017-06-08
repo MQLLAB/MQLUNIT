@@ -31,7 +31,8 @@
 
 //-----------------------------------------------------------------------------
 
-/// @class A set of assert methods.
+/// @brief A set of assert methods.
+///
 /// Due to the absence of exceptions in MQL the following convention is used
 /// to specify an assertion error. Each assertion function will return a NULL
 /// string in case of a success and the detailed failure description in case of
