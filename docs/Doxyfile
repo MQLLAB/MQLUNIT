@@ -3,7 +3,8 @@ OUTPUT_DIRECTORY = docs
 OUTPUT_LANGUAGE  = English
 ALWAYS_DETAILED_SEC = YES
 TAB_SIZE = 4
-INPUT = MQL4/Include/MQLUNIT/
+INPUT = MQL4/Include/MQLUNIT/ \
+        docs/home.md
 FILE_PATTERNS  = *.mq*
 EXTENSION_MAPPING = mq4=c++ mqh=c++
 RECURSIVE = YES
@@ -12,6 +13,7 @@ GENERATE_HTMLHELP = NO
 GENERATE_LATEX = NO
 EXTRACT_ALL = YES
 INHERIT_DOCS = YES
+USE_MDFILE_AS_MAINPAGE = docs/home.md
 #HTML_HEADER=docs/header.html
 #HTML_FOOTER=docs/footer.html
 #HTML_EXTRA_STYLESHEET=docs/customdoxygen.css
