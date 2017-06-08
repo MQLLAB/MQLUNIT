@@ -34,23 +34,33 @@
 
 //-----------------------------------------------------------------------------
 
-class MQLUNIT_TestListener
-{
+/// @class A Listener for test progress.
+class MQLUNIT_TestListener {
 private:
     // copying of the interface is forbidden
     MQLUNIT_TestListener(const MQLUNIT_TestListener& that) {};
     void operator =(const MQLUNIT_TestListener& that) {};
 public:
+    /// @brief Constructor
     MQLUNIT_TestListener() {};
+
+    /// @brief Destructor
     virtual ~MQLUNIT_TestListener() {};
-  
+
+    /// @brief Failure occurred event.
+    /// @param failure : failure details
+    /// @see MQLUNIT_TestFailure
     virtual void addFailure(MQLUNIT_TestFailure* failure) = 0;
-    virtual void startTest(string name) = 0;
-    virtual void endTest(string name) = 0;
+    
+    /// @brief Test started event.
+    /// @param name : name of a test
+    virtual void startTest(const string name) = 0;
+    
+    /// @brief Test ended event.
+    /// @param name : name of a test
+    virtual void endTest(const string name) = 0;
 };
 
 //-----------------------------------------------------------------------------
-
-//#undef TestListener
 
 #endif

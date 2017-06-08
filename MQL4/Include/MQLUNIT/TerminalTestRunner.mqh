@@ -38,27 +38,57 @@
 
 //-----------------------------------------------------------------------------
 
+/// @class Test runner that outputs results to the "Experts" log window of
+/// MetaTrader terminal.
+/// Optionally can pop up an alert dialog with a list of test failures if any
+/// occure.
+/// @see MQLUNIT_TestRunner
 class MQLUNIT_TerminalTestRunner : public MQLUNIT_TestRunner {
 private:
     MQLLIB_Collections_Vector<MQLUNIT_TestFailure*> _failures;
     string _output;
     bool _alertsEnabled;
+
 public:
+    /// @brief Constructor : disable alerts by default.
     MQLUNIT_TerminalTestRunner() : _output(""), _alertsEnabled(false) {};
+
+    /// @brief Destructor
     ~MQLUNIT_TerminalTestRunner() {};
   
-    /// @defgroup TestListenerImpl
-    /// @{
+    // MQLUNIT_TestListener implementation {
+
+    /// @brief Registeres a test failure.
+    /// @param failure : failure details
+    /// @see MQLUNIT_TestFailure
     void addFailure(MQLUNIT_TestFailure* failure);
-    void startTest(string name);
-    void endTest(string name) {};
-    /// @}
-    /// @defgroup TestRunnerImpl
-    /// @{
+    
+    /// @brief Test started event.
+    /// @param name : name of a test
+    void startTest(const string name);
+    
+    /// @brief Test ended event.
+    /// @param name : name of a test
+    void endTest(const string name) {};
+
+    // }
+
+    // MQLUNIT_TestRunner implementation {
+
+    /// @brief Run a test and output the result to the console.
+    /// @param test : a test to run
+    /// @see MQLUNIT_Test
     void run(MQLUNIT_Test* test);
-    /// @}
+    
+    // }
   
-    void setAlertsEnabled(bool alertsEnabled) { _alertsEnabled = alertsEnabled; };
+    /// @brief Enable or disable alerts window pop up in case of a test
+    /// failure.
+    /// @param alertsEnabled : set to true to enable alerts, set to false to
+    /// disable alerts
+    void setAlertsEnabled(bool alertsEnabled) {
+        _alertsEnabled = alertsEnabled;
+    };
 
 private:
     void printFailureCount(uint count) const;
@@ -74,7 +104,7 @@ void MQLUNIT_TerminalTestRunner::printFailureCount(uint count) const {
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TerminalTestRunner::startTest(string name) {
+void MQLUNIT_TerminalTestRunner::startTest(const string name) {
     checkWrap();
     StringAdd(_output, ".");
 }

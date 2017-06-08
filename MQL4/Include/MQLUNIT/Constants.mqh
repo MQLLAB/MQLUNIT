@@ -29,9 +29,10 @@
 #ifndef MQLUNIT_CONSTANTS_MQH
 #define MQLUNIT_CONSTANTS_MQH
 
-
 //-----------------------------------------------------------------------------
 
+/// @brief The number of character to wrap the test progress output at.
+/// Only applicable to text based output (console, terminal, text file).
 #define MQLUNIT_OUTPUT_WRAP 42
 
 //-----------------------------------------------------------------------------

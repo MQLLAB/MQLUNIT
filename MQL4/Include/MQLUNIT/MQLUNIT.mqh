@@ -42,6 +42,7 @@
 
 //-----------------------------------------------------------------------------
 
+/// @def Fail the test providing a specific failure description.
 #define ASSERT_FAIL(message) if (!__failed__) {                              \
     string __message__ = MQLUNIT_Assert::fail(message);                      \
     if (__message__ != NULL) {                                               \
@@ -56,8 +57,9 @@
 
 //-----------------------------------------------------------------------------
 
-#define ASSERT_NULL(message, condition) if (!__failed__) {                   \
-    string __message__ = MQLUNIT_Assert::assertNull(message, condition);     \
+/// @def Asserts that the @a entity is NULL.
+#define ASSERT_NULL(message, entity) if (!__failed__) {                      \
+    string __message__ = MQLUNIT_Assert::assertNull(message, entity);        \
     if (__message__ != NULL) {                                               \
         __result__.addFailure(                                               \
             new MQLUNIT_TestFailure(                                         \
@@ -70,8 +72,9 @@
 
 //-----------------------------------------------------------------------------
 
-#define ASSERT_NOT_NULL(message, condition) if (!__failed__) {               \
-    string __message__ = MQLUNIT_Assert::assertNotNull(message, condition);  \
+/// @def Asserts that the @a entity is not NULL.
+#define ASSERT_NOT_NULL(message, entity) if (!__failed__) {                  \
+    string __message__ = MQLUNIT_Assert::assertNotNull(message, entity);     \
     if (__message__ != NULL) {                                               \
         __result__.addFailure(                                               \
             new MQLUNIT_TestFailure(                                         \
@@ -84,6 +87,7 @@
 
 //-----------------------------------------------------------------------------
 
+/// @def Asserts that the boolean @a condition is true.
 #define ASSERT_TRUE(message, condition) if (!__failed__) {                   \
     string __message__ = MQLUNIT_Assert::assertTrue(message, condition);     \
     if (__message__ != NULL) {                                               \
@@ -98,6 +102,7 @@
 
 //-----------------------------------------------------------------------------
 
+/// @def Asserts that the boolean @a condition is false.
 #define ASSERT_FALSE(message, condition) if (!__failed__) {                  \
     string __message__ = MQLUNIT_Assert::assertFalse(message, condition);    \
     if (__message__ != NULL) {                                               \
@@ -112,6 +117,13 @@
 
 //-----------------------------------------------------------------------------
 
+/// @def Asserts that the entity @a actual is equal to the entity @a expected.
+/// Entities can be values, strings, variables of the primitive types, object
+/// references, pointers or arrays of primitive types, object references or
+/// pointers.
+/// @note Enumeration values, function pointers and arrays of enumeration
+/// values or function pointers are not supported and will generate an error
+/// during the compilation.
 #define ASSERT_EQUALS(message, expected, actual) if (!__failed__) {          \
     string __message__ = MQLUNIT_Assert::assertEquals(                       \
         message, expected, actual                                            \
@@ -128,10 +140,12 @@
 
 //-----------------------------------------------------------------------------
 
+/// @def Starts the MQLUNIT test block definition.
 #define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {
      
 //-----------------------------------------------------------------------------
 
+/// @def Defines a beginning of test with a @a name.
 #define TEST_START(name) {                                                   \
     string __testName__ = StringConcatenate("test", #name);                  \
     bool __failed__ = false;                                                 \
@@ -140,6 +154,7 @@
 
 //-----------------------------------------------------------------------------
 
+/// @def Defines an end of a test.
 #define TEST_END ;                                                           \
     __result__.endTest(__testName__);                                        \
     tearDown();                                                              \
@@ -147,6 +162,7 @@
 
 //-----------------------------------------------------------------------------
 
+/// @def Ends the MQLUNIT test block definition.
 #define MQLUNIT_END };
 
 //-----------------------------------------------------------------------------

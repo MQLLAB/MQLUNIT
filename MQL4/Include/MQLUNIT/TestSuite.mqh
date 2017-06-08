@@ -40,20 +40,48 @@
 
 //-----------------------------------------------------------------------------
 
-/// @brief Test case..
+/// @class  A MQLUNIT_TestSuite is a Composite of MQLUNIT_Test.
+/// It runs a collection of test cases.
+/// Example usage:
+/// @code
+/// MQLUNIT_TestSuite suite;
+/// suite.addTest(new MyFirstTestCase());
+/// suite.addTest(new MySecondTestCase());
+/// suite.addTest(new MyThirdTestCase());
+///
+/// MQLUNIT_TerminalTestRunner runner;
+/// runner.run(&suite);
+/// @endcode
+/// @see MQLUNIT_Test
+/// @see MQLUNIT_TestCase
+/// @see MQLUNIT_TestResult
 class MQLUNIT_TestSuite : public MQLUNIT_Test {
 private:
     MQLLIB_Collections_Vector<MQLUNIT_Test*> _tests;
 public:
+    /// @brief Constructor : creates a test suite using a class name as a test
+    /// suite name.
     MQLUNIT_TestSuite() : MQLUNIT_Test(typename(this)) {};
+
+    /// @brief Constructor : creates a test suite with a provided suite name.
+    /// @param name : test suite name
     MQLUNIT_TestSuite(const string name) : MQLUNIT_Test(name) {};
+
+    /// @brief Destructor.
     virtual ~MQLUNIT_TestSuite() {};
+
+    /// @brief Add a test to this test suite.
+    /// @param test : a test to add to this test suite
     virtual void addTest(MQLUNIT_Test* test) { _tests.add(test); };
+
+    /// @brief Runs the test suite.
+    /// @param result : collects the results of executing a test suite
+    /// @see #MQLUNIT_TestResult
     virtual void run(MQLUNIT_TestResult* result);
 };
 
-
 //-----------------------------------------------------------------------------
+
 void MQLUNIT_TestSuite::run(MQLUNIT_TestResult* result) {
     MQLLIB_FOREACHV(MQLUNIT_Test*, test, _tests) {
         test.run(result);

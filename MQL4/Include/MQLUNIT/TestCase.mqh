@@ -34,17 +34,70 @@
 
 //-----------------------------------------------------------------------------
 
-/// @brief Test case.
+/// @class A test case defines the fixture to run multiple tests.
+/// To define a test case:<br>
+/// 1) implement a subclass of MQLUNIT_TestCase<br>
+/// 2) define instance variables that store the state of the fixture<br>
+/// 3) initialize the fixture state by overriding @a setUp<br>
+/// 4) clean-up after a test by overriding @a tearDown<br>
+/// Each test runs in its own fixture so there can be no side effects among
+/// test runs.<br>
+/// For example:<br>
+/// @code
+/// class MathTest : public MQLUNIT_TestCase {
+/// private:
+///     double a, b;
+/// public:
+///     MathTest() : MQLUNIT_TestCase(typename(this)) {};
+///     MathTest(string name) : MQLUNIT_TestCase(name) {};
+///
+///     void setUp() { a = 1.0; b = 2.0; };
+/// 
+///     MQLUNIT_START
+///
+///     TEST_START(Add) {
+///         double result = a + b;
+///         ASSERT_TRUE("Must add doubles", result == 4.0);
+///     }
+///     TEST_END
+///
+///     MQLUNIT_END
+/// };
+/// @endcode
+/// The tests to be run can be collected into an @a MQLUNIT_TestSuite.<br>
+/// @code
+/// MQLUNIT_TestSuite suite;
+/// suite.addTest(new MyFirstTest());
+/// suite.addTest(new MySecondTest());
+/// suite.addTest(new MyThirdTest());
+///
+/// MQLUNIT_TerminalTestRunner runner;
+/// runner.run(&suite);
+/// @endcode
+/// @see MQLUNIT_TestResult
+/// @see MQLUNIT_TestSuite
 class MQLUNIT_TestCase : public MQLUNIT_Test {
 public:
+    /// @brief Constructor : creates a test case using a class name as a test
+    /// case name.
     MQLUNIT_TestCase() : MQLUNIT_Test(typename(this)) {};
+
+    /// @brief Constructor : creates a test case with a provided name.
+    /// @param name : test case name
     MQLUNIT_TestCase(const string name) : MQLUNIT_Test(name) {};
+
+    /// @brief Destructor
     virtual ~MQLUNIT_TestCase() {};
+
     /// @brief Set up context before running a test.
     virtual void setUp() {};
+    
     /// @brief Clean up after the test run.
     virtual void tearDown() {};
+    
     /// @brief Runs the tests.
+    /// @param result : collects the results of executing a test case
+    /// @see #MQLUNIT_TestResult
     virtual void run(MQLUNIT_TestResult* result) = 0;
 };
 

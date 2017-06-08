@@ -33,22 +33,39 @@ class MQLUNIT_TestResult;
 
 //-----------------------------------------------------------------------------
 
-/// @brief Base class for all tests.
+/// @class Base class for all tests.
+/// An @a MQLUNIT_Test can be run and collect its results.
+/// @see #MQLUNIT_TestResult
 class MQLUNIT_Test {
 private:
-    string _name;
+    const string _name;
+    
 public:
+    /// @brief Constructor : creates a test using a class name as a test name.
     MQLUNIT_Test() : _name(typename(this)) {};
+
+    /// @brief Constructor : creates a test with a provided test name.
+    /// @param name : test name
     MQLUNIT_Test(const string name) : _name(name) {};
+
+    /// @brief Destructor
     virtual ~MQLUNIT_Test() {};
+
     /// @brief Returns a name of a test.
     /// @return the name of the test
     string getName() { return _name; };
-    /// @brief Runs the tests.
+
+    /// @brief Runs the test.
+    /// @param result : collects the results of executing a test
+    /// @see #MQLUNIT_TestResult
     virtual void run(MQLUNIT_TestResult* result) = 0;
+
+private:    
+    // copying of the interface is forbidden
+    MQLUNIT_Test(const MQLUNIT_Test& that) {};
+    void operator =(const MQLUNIT_Test& that) {};
 };
 
 //-----------------------------------------------------------------------------
-
 
 #endif

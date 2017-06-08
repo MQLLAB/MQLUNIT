@@ -31,7 +31,7 @@
 
 //-----------------------------------------------------------------------------
 
-/// @brief A set of assert methods.
+/// @class A set of assert methods.
 /// Due to the absence of exceptions in MQL the following convention is used
 /// to specify an assertion error. Each assertion function will return a NULL
 /// string in case of a success and the detailed failure description in case of
@@ -54,7 +54,7 @@ public:
     /// @param message : assertion description
     /// @param expected : expected value
     /// @param actual : actual value
-    /// @return NULL on success or the failure description
+    /// @return NULL on success or the failure description   
     // We must define one of the assertEqual overloads in class
     // definition and one separately to avoid the compiler complaints
     // about not being able to overload a template function (which it does

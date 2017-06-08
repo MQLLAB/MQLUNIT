@@ -39,24 +39,44 @@
 
 //-----------------------------------------------------------------------------
 
-class MQLUNIT_ConsoleTestRunner : public MQLUNIT_TestRunner{
+/// @class Test runner that outputs results to the text console.
+/// If the console is not visible, it gets allocated and displayed. In case
+/// the console exists, the runner attaches to it ro display test results.
+/// @see MQLUNIT_TestRunner
+class MQLUNIT_ConsoleTestRunner : public MQLUNIT_TestRunner {
 private:
     MQLLIB_Collections_Vector<MQLUNIT_TestFailure*> _failures;
     uint _charCount;
+
 public:
+    /// @brief Constructor
     MQLUNIT_ConsoleTestRunner() : _charCount(0) {};
+    
+    /// @brief Destructor
     ~MQLUNIT_ConsoleTestRunner() {};
   
-    /// @defgroup TestListenerImpl
-    /// @{
+    // MQLUNIT_TestListener implementation {
+    /// @brief Registeres a test failure.
+    /// @param failure : failure details
+    /// @see MQLUNIT_TestFailure
     void addFailure(MQLUNIT_TestFailure* failure);
-    void startTest(string name);
-    void endTest(string name) {};
-    /// @}
-    /// @defgroup TestRunnerImpl
-    /// @{
+    
+    /// @brief Test started event.
+    /// @param name : name of a test
+    void startTest(const string name);
+    
+    /// @brief Test ended event.
+    /// @param name : name of a test
+    void endTest(const string name) {};
+    // }
+ 
+    // MQLUNIT_TestRunner implementation {
+    /// @brief Run a test and output the result to the console.
+    /// @param test : a test to run
+    /// @see MQLUNIT_Test
     void run(MQLUNIT_Test* test);
-    /// @}
+    // }
+
 private:
     void printFailureCount(uint count) const;
     void checkWrap();
@@ -67,13 +87,13 @@ private:
 void MQLUNIT_ConsoleTestRunner::checkWrap() {
     if (_charCount == MQLUNIT_OUTPUT_WRAP) {
         MQLLIB_Utils_Console::writeLine();
-        _charCount =0;
+        _charCount = 0;
     }
 }
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_ConsoleTestRunner::startTest(string name) {
+void MQLUNIT_ConsoleTestRunner::startTest(const string name) {
     checkWrap();
     MQLLIB_Utils_Console::write(".");
     _charCount++;

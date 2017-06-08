@@ -1,4 +1,4 @@
-Enumeration values, function pointest and arrays of enumeration values
+Enumeration values, function pointers and arrays of enumeration values
 or function pointers cannot be asserted for equality.
 
 Example 1:
