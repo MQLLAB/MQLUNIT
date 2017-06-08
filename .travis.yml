@@ -1,5 +1,9 @@
 sudo: false
 
+env:
+  global:
+    secure: "BosKmxnUfr+sc7yaUj8/ZVbq3exZWXSmr7EisBS+hAu+ZqyzGvhLWB9hbtpkhbiMU+KPGToYQP4OkJgr0f43C+gQOCoUKNny5+iwUZQUQbj6gl3RefUxzZuoym1ANqXkfvOkQ7mFz935EIC/k1u+vjJvHwmi8TgFd3GapCHS2SxZpSQAhwjz39ZD5v2KB8aqcJj/amaG1gpU7EgiWAjEiTRW+z4wY+/wHnkePDL5FoxKeN0e+ogTyJnqBND5V5I+8NAeINPd+/o2i2gs5b6lMPxFNmglOevCEFq2u8H7/cHyp+JapneQsVNAYK6GR0C9Z0UC2cg6115Ok43lpcbI1sVcFWhdioGPrjfKAAs8miKpLEEoMHzn/yyXfdF5NnUJ47fbBiGE46fgDIgy6DFIXvHT0qgzz2Ps/U6K95J/7JV+l5SxcDhO3AOqq6f5U3yxSQ9QasH+ypxviqQAn6HIFqHcEE6VQHlsNXzZjNhAyozxL4dSpAT48PXPWSVUQwdbxWoctMUrYtADkesS4lN90jgpj4W+I16sjVT2BxL/Ckywlai16brYDEvZird6F5zFqWjbshviFTvam6pcyMyK1mrVDW52bVpknQLiYvki5LYUK2AXe26CaL/rRELqqPcUlf6wvdYaOcGuGnIbrHDGu8+GfTOFtKa8A93m32P278Y="
+
 branches:
   only:
     - master
@@ -19,11 +23,10 @@ script:
   - ls
   - doxygen docs/Doxyfile
 
-#deploy:
-#  provider: pages
-#  skip_cleanup: true
-#  local_dir: $TRAVIS_BUILD_DIR/docs/html
-#  github_token: $GITHUB_API_KEY
-#  on:
-#    branch: master
-#
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: $TRAVIS_BUILD_DIR/docs/html
+  github_token: $GITHUB_API_KEY
+  on:
+    branch: master
