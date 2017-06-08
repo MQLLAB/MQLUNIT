@@ -12,3 +12,7 @@ GENERATE_HTMLHELP = NO
 GENERATE_LATEX = NO
 EXTRACT_ALL = YES
 INHERIT_DOCS = YES
+HTML_HEADER=docs/header.html
+HTML_FOOTER=docs/footer.html
+HTML_EXTRA_STYLESHEET=docs/customdoxygen.css
+HTML_EXTRA_FILES=docs/doxy-boot.js
