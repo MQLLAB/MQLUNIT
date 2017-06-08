@@ -1,5 +1,6 @@
 install:
-  - choco install doxygen.portable
+  - appveyor-retry choco install doxygen.portable
+  - appveyor-retry choco install graphviz.portable
 build_script:
   - echo "Build..."
 test_script:
