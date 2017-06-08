@@ -20,8 +20,8 @@ before_install:
   - mv ${TMPDIR-/tmp}/doxygen-${DOXYGEN_VERSION}/bin/doxygen $HOME/local/bin/doxygen
 
 script:
-  - doxygen --version
-  - doxygen docs/Doxyfile
+  - $HOME/local/bin/doxygen --version
+  - $HOME/local/bin/doxygen docs/Doxyfile
 
 deploy:
   provider: pages
