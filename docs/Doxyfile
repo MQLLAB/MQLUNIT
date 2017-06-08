@@ -4,8 +4,11 @@ OUTPUT_LANGUAGE  = English
 ALWAYS_DETAILED_SEC = YES
 TAB_SIZE = 4
 INPUT = MQL4/Include/MQLUNIT/ \
-        docs/home.md
-FILE_PATTERNS  = *.mq*
+        docs/home.md \
+        docs/faq.md \
+        docs/cookbook.md \
+        docs/developer.md
+FILE_PATTERNS  = *.mq* *.md
 EXTENSION_MAPPING = mq4=c++ mqh=c++
 RECURSIVE = YES
 SEARCH_ENGINE = YES
