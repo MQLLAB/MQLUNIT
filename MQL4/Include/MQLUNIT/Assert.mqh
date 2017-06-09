@@ -29,6 +29,8 @@
 #ifndef MQLUNIT_ASSERT_MQH
 #define MQLUNIT_ASSERT_MQH
 
+#include <MQLLIB/Lang/Number.mqh>
+
 //-----------------------------------------------------------------------------
 
 /// @brief A set of assert methods.
@@ -200,6 +202,27 @@ static string MQLUNIT_Assert::assertEquals(
 static string MQLUNIT_Assert::assertEqualsDelta(
     string message, double expected, double actual, double delta
 ) {
+    // by definition NaN is equal to NaN
+    if (MQLLIB_Lang_Double::isNaN(expected)
+        && MQLLIB_Lang_Double::isNaN(actual)
+    ) {
+        return NULL;
+    }
+
+    // by definition positive infinity equals negative infinity
+    if (MQLLIB_Lang_Double::isPositiveInfinity(expected)
+        && MQLLIB_Lang_Double::isPositiveInfinity(actual)
+    ) {
+        return NULL;
+    }
+
+    // by definition negative infinity equals negative infinity
+    if (MQLLIB_Lang_Double::isNegativeInfinity(expected)
+        && MQLLIB_Lang_Double::isNegativeInfinity(actual)
+    ) {
+        return NULL;
+    }
+
     if (!(MathAbs(expected - actual) <= delta)) {
         return  StringConcatenate(
             message, ": expected:<", expected, "> but was:<", actual, ">"

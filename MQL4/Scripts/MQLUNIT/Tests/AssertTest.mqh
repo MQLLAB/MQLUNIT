@@ -47,7 +47,7 @@ public:
 
     // This is the most fundamental assertions test. This assertion is used in
     // ASSERT_FAIL macro to fail other tests, so it's defined here directly.
-    TEST_START(Fail) {
+    TEST_START(Fails) {
         string result = MQLUNIT_Assert::fail();
         if (result == NULL) {
             __result__.addFailure(
@@ -101,7 +101,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertNullPointerFail) {
+    TEST_START(AssertNullPointerFails) {
         MQLLIB_Lang_AutoPtr<__Object__> obj = new __Object__(0);
 
         string result = MQLUNIT_Assert::assertNull(
@@ -115,7 +115,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertNullStringFail) {
+    TEST_START(AssertNullStringFails) {
         string str = "content";
 
         string result = MQLUNIT_Assert::assertNull("NULL must be NULL", str);
@@ -127,7 +127,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertNullDoubleFail) {
+    TEST_START(AssertNullDoubleFails) {
         double d1 = 1.25;
 
         string result = MQLUNIT_Assert::assertNull("NULL must be NULL", d1);
@@ -167,7 +167,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertNotNullStringFail) {
+    TEST_START(AssertNotNullStringFails) {
         string nullStr = NULL;
 
         string result = MQLUNIT_Assert::assertNotNull(
@@ -195,7 +195,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertNotNullPointerFail) {
+    TEST_START(AssertNotNullPointerFails) {
         __Object__* obj = NULL;
 
         string result = MQLUNIT_Assert::assertNotNull(
@@ -253,7 +253,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertEqualObjectFail) {
+    TEST_START(AssertEqualObjectFails) {
         __Object__ obj1(1);
         __Object__ obj2(2);
 
@@ -268,7 +268,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertEqualReferencesFail) {
+    TEST_START(AssertEqualReferencesFails) {
         MQLLIB_Lang_AutoPtr<__Object__> obj1 = new __Object__(0);
         MQLLIB_Lang_AutoPtr<__Object__> obj2 = new __Object__(1);
 
@@ -335,7 +335,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertTrueFail) {
+    TEST_START(AssertTrueFails) {
         string result = MQLUNIT_Assert::assertTrue("Must be true", false);
         if (result == NULL) {
             ASSERT_FAIL("Assert::assertTrue() must report failure");
@@ -355,7 +355,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertFalseFail) {
+    TEST_START(AssertFalseFails) {
         string result = MQLUNIT_Assert::assertFalse("Must be false", true);
         if (result == NULL) {
             ASSERT_FAIL("Assert::assertFalse() must report failure");
@@ -392,7 +392,7 @@ public:
     //----------------------------------------
 
 
-    TEST_START(AssertSameFail) {
+    TEST_START(AssertSameFails) {
         __AnotherObject__ obj1;
         __AnotherObject__ obj2;
 
@@ -405,7 +405,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertSamePointerFail) {
+    TEST_START(AssertSamePointerFails) {
         MQLLIB_Lang_AutoPtr<__AnotherObject__> obj1 = new __AnotherObject__();
         MQLLIB_Lang_AutoPtr<__AnotherObject__> obj2 = new __AnotherObject__();
 
@@ -450,7 +450,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertNotSameFail) {
+    TEST_START(AssertNotSameFails) {
         __AnotherObject__ obj;
 
         string result = MQLUNIT_Assert::assertNotSame(
@@ -464,7 +464,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertNotSamePointerFail) {
+    TEST_START(AssertNotSamePointerFails) {
         MQLLIB_Lang_AutoPtr<__AnotherObject__> obj = new __AnotherObject__();
 
         string result = MQLUNIT_Assert::assertNotSame(
@@ -563,7 +563,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertDoubleArrayEqualsFail) {
+    TEST_START(AssertDoubleArrayEqualsFails) {
         double d1[] = { 1.1, 2.2, 3.3, 4.4 };
         double d2[] = { 4.4, 3.3, 2.2, 1.1 };
         double d3[] = { 1.1, 2.2 };
@@ -609,7 +609,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertStringArrayEqualsFail) {
+    TEST_START(AssertStringArrayEqualsFails) {
         string s1[] = { "one", "two" };
         string s2[] = { "two", "one" };
         string s3[] = { "one" };
@@ -655,7 +655,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertObjectArrayEqualsFail) {
+    TEST_START(AssertObjectArrayEqualsFails) {
         __Object__ obj1(0);
         __Object__ obj2(1);
 
@@ -711,7 +711,7 @@ public:
 
     //----------------------------------------
 
-    TEST_START(AssertPointerArrayEqualsFail) {
+    TEST_START(AssertPointerArrayEqualsFails) {
         MQLLIB_Lang_AutoPtr<__Object__> obj1 = new __Object__(0);
         MQLLIB_Lang_AutoPtr<__Object__> obj2 = new __Object__(1);
 
@@ -738,60 +738,6 @@ public:
         );
         if (result == NULL) {
             ASSERT_FAIL("Assert::assertEquals() must report failure");
-        }
-    }
-    TEST_END
-
-    //----------------------------------------
-
-    TEST_START(AssertEqualsDelta) {
-        double d1 = 1.000001;
-        double d2 = 1.0;
-        double delta1 = 0.00001;
-
-        string result = MQLUNIT_Assert::assertEqualsDelta(
-            "Doubles must be equal within an acceptable error", d2, d1, delta1
-        );
-        if (result != NULL) {
-            ASSERT_FAIL("Assert::assertEqualsDelta() must report success");
-        }
-
-        float f1 = 1.0001f;
-        float f2 = 1.0f;
-        float delta2 = 0.001f;
-
-        result = MQLUNIT_Assert::assertEqualsDelta(
-            "Floats must be equal within an acceptable error", f2, f1, delta2
-        );
-        if (result != NULL) {
-            ASSERT_FAIL("Assert::assertEqualsDelta() must report success");
-        }
-    }
-    TEST_END
-
-    //----------------------------------------
-
-    TEST_START(AssertEqualsDeltaFail) {
-        double d1 = 1.000001;
-        double d2 = 1.0;
-        double delta1 = 0.0000001;
-
-        string result = MQLUNIT_Assert::assertEqualsDelta(
-            "Doubles must be equal within an acceptable error", d2, d1, delta1
-        );
-        if (result == NULL) {
-            ASSERT_FAIL("Assert::assertEqualsDelta() must report failure");
-        }
-
-        float f1 = 1.001f;
-        float f2 = 1.0f;
-        float delta2 = 0.0001f;
-
-        result = MQLUNIT_Assert::assertEqualsDelta(
-            "Floats must be equal within an acceptable error", f2, f1, delta2
-        );
-        if (result == NULL) {
-            ASSERT_FAIL("Assert::assertEqualsDelta() must report failure");
         }
     }
     TEST_END
