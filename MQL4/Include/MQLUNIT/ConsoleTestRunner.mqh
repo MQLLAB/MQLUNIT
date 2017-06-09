@@ -57,6 +57,7 @@ public:
     ~MQLUNIT_ConsoleTestRunner() {};
   
     // MQLUNIT_TestListener implementation {
+
     /// @brief Registeres a test failure.
     /// @param failure : failure details
     /// @see MQLUNIT_TestFailure
@@ -69,13 +70,16 @@ public:
     /// @brief Test ended event.
     /// @param name : name of a test
     void endTest(const string name) {};
+
     // }
  
     // MQLUNIT_TestRunner implementation {
+
     /// @brief Run a test and output the result to the console.
     /// @param test : a test to run
     /// @see MQLUNIT_Test
     void run(MQLUNIT_Test* test);
+    
     // }
 
 private:

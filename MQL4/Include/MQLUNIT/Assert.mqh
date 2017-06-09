@@ -43,18 +43,18 @@ public:
     /// Object are passed by reference. Pointers must be dereferenced to
     /// objects before passed to this method, therefore they must be checked
     /// for NULL before checking for equality.
-    /// @param message : assertion description
+    /// @param message  : assertion description
     /// @param expected : expected object
-    /// @param actual : actual object
+    /// @param actual   : actual object
     /// @return NULL on success or the failure description
     /// @see MQLUNIT_Assert::assertNull
     template <typename T>
     static string assertEquals(string message, T& expected, T& actual);
     
     /// @brief Asserts that two entities are equal.
-    /// @param message : assertion description
+    /// @param message  : assertion description
     /// @param expected : expected value
-    /// @param actual : actual value
+    /// @param actual   : actual value
     /// @return NULL on success or the failure description   
     // We must define one of the assertEqual overloads in class
     // definition and one separately to avoid the compiler complaints
@@ -75,8 +75,8 @@ public:
     /// elements are equal in each position. Equality check for the elements
     /// will work with primitive types, strings, object references and pointers. 
     /// @param expected : expected array
-    /// @param actual : actual array
-    /// @param message : assertion description
+    /// @param actual   : actual array
+    /// @param message  : assertion description
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertEquals(
@@ -88,8 +88,8 @@ public:
     /// objects before passed to this method, therefore they must be checked
     /// for NULL before checking for equality.
     /// @param expected : expected object
-    /// @param actual : actual object
-    /// @param message : assertion description
+    /// @param actual   : actual object
+    /// @param message  : assertion description
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertSame(string message, T& expected, T& actual);
@@ -100,8 +100,8 @@ public:
     /// objects before passed to this method, therefore they must be checked
     /// for NULL before checking for equality.
     /// @param expected : expected object
-    /// @param actual : actual object
-    /// @param message : assertion description
+    /// @param actual   : actual object
+    /// @param message  : assertion description
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertNotSame(string message, T& expected, T& actual);
@@ -109,7 +109,7 @@ public:
     /// @brief Asserts that the entity is not NULL.
     /// Entity can be a variable of a primitive type, object reference or a
     /// pointer.
-    /// @param entity : variable, object reference or a pointer to check
+    /// @param entity  : variable, object reference or a pointer to check
     /// @param message : assertion description
     /// @return NULL on success or the failure description
     template <typename T>
@@ -118,20 +118,20 @@ public:
     /// @brief Asserts that the entity is NULL.
     /// Entity can be a variable of a primitive type, object reference or a
     /// pointer.
-    /// @param entity : variable, object reference or a pointer to check
+    /// @param entity  : variable, object reference or a pointer to check
     /// @param message : assertion description
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertNull(string message, T entity);
   
     /// @brief Asserts that the condition is true.
-    /// @param message : assertion description
+    /// @param message   : assertion description
     /// @param condition : boolean expression to check
     /// @return NULL on success or the failure description
     static string assertTrue(string message, bool condition);
   
     /// @brief Asserts that the condition is false
-    /// @param message : assertion description
+    /// @param message   : assertion description
     /// @param condition : boolean expression to check
     /// @return NULL on success or the failure description
     static string assertFalse(string message, bool condition);
