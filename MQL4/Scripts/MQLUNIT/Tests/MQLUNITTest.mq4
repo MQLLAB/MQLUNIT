@@ -41,7 +41,7 @@ void OnStart() {
     MQLUNIT_TestSuite suite;
     suite.addTest(new MQLUNIT_AssertTest());
 
-    MQLUNIT_ConsoleTestRunner runner;
+    MQLUNIT_TerminalTestRunner runner;
     runner.run(&suite);
 }
 
