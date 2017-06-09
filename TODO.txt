@@ -4,6 +4,5 @@
 * Create an a test runner that produces JUnit compatible XML output
 * Create a generic test runner that uses a specific outputter
 * Make the build and test run in AppVeyor
-* Make documentation and website build run in TravisCI
 * Add AppVeyor setup instructions to the cookbook
 * Make sure it's not possible to have duplicate test names in the same TestCase
