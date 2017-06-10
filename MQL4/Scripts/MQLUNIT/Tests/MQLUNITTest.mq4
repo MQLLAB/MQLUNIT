@@ -33,6 +33,7 @@
 
 #include "AssertTest.mqh"
 #include "DoublePrecisionAssertTest.mqh"
+#include "ComparisonCompactorTest.mqh"
 
 //-----------------------------------------------------------------------------
 
@@ -42,9 +43,9 @@ void OnStart() {
     MQLUNIT_TestSuite suite;
     suite.addTest(new MQLUNIT_AssertTest());
     suite.addTest(new MQLUNIT_DoublePrecisionAssertTest());
-
+    suite.addTest(new MQLUNIT_ComparisonCompactorTest());
+    
     MQLUNIT_TerminalTestRunner runner;
     runner.run(&suite);
 }
-
 //-----------------------------------------------------------------------------

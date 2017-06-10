@@ -31,6 +31,9 @@
 
 #include <MQLLIB/Lang/Number.mqh>
 
+#include "Constants.mqh"
+#include "ComparisonCompactor.mqh"
+
 //-----------------------------------------------------------------------------
 
 /// @brief A set of assert methods.
@@ -64,10 +67,16 @@ public:
     // just fine when we separate definition like this).
     template <typename T>
     static string assertEquals(string message, T expected, T actual) {
-        if (expected != actual) {
+        if (expected != actual && typename(expected) != "string") {
             return StringConcatenate(
-                message, ": expected:<", expected, "> but was:<", actual, ">"
+                getMessage(message), "expected:<", expected, "> but was:<",
+                actual, ">"
             );
+        } else if (expected != actual) {
+            MQLUNIT_ComparisonCompactor compactor(
+                MQLUNIT_MAX_CONTEXT_LENGTH, (string) expected, (string) actual
+            );
+            return compactor.compact(message);
         }
         return NULL;
     };
@@ -157,6 +166,15 @@ public:
     /// @return Failure description
     static string fail(string message) { return message; };
 
+    /// @brief Helper function made public for code reuse.
+    ///
+    /// Not a part of the API. Maybe removed at any time.
+    ///
+    /// @note Since MQL doesn't suport friend classes, we are forced to make
+    /// some "private" helper methods "public" to avoid copying and pasting
+    /// the same code to multiple classes.
+    static string getMessage(const string message);
+
 private:
     template <typename T>
     static string assertArrayElement(
@@ -173,13 +191,12 @@ private:
     ) {
         if (expected != actual) {
             return StringConcatenate(
-                message, ": expected array[", IntegerToString(i),"]:<",
-                expected, "> but was:<", actual, ">"
+                getMessage(message), "expected array[", IntegerToString(i),
+                "]:<", expected, "> but was:<", actual, ">"
             );
         }
         return NULL;
     };
-
 };
 
 //-----------------------------------------------------------------------------
@@ -190,8 +207,8 @@ static string MQLUNIT_Assert::assertEquals(
 ) {
     if (expected != actual) {
         return  StringConcatenate(
-            message, ": expected:<", typename(expected), "#", &expected,
-            "> but was:<", typename(actual), "#", &actual, ">"
+            getMessage(message), "expected:<", typename(expected), "#",
+            &expected, "> but was:<", typename(actual), "#", &actual, ">"
         );
     }
     return NULL;
@@ -225,7 +242,8 @@ static string MQLUNIT_Assert::assertEqualsDelta(
 
     if (!(MathAbs(expected - actual) <= delta)) {
         return  StringConcatenate(
-            message, ": expected:<", expected, "> but was:<", actual, ">"
+            getMessage(message), "expected:<", expected, "> but was:<",
+            actual, ">"
         );
     }
     return NULL;
@@ -265,7 +283,8 @@ static string MQLUNIT_Assert::assertSame(
 ) {
   if (GetPointer(expected) != GetPointer(actual)) {
       return StringConcatenate(
-          message, ": expected same:<", &expected , "> was not:<", &actual, ">"
+          getMessage(message), "expected same:<", &expected , "> was not:<",
+          &actual, ">"
       );
   }
   return NULL;
@@ -278,7 +297,7 @@ static string MQLUNIT_Assert::assertNotSame(
     string message, T& expected, T& actual
 ) {
     if (GetPointer(expected) == GetPointer(actual)) {
-        return StringConcatenate(message, ": expected not same");
+        return StringConcatenate(getMessage(message), "expected not same");
     }
   return NULL;
 }
@@ -294,7 +313,7 @@ static string MQLUNIT_Assert::assertEquals(
 
   if (expectedSize != actualSize) {
       return StringConcatenate(
-          message , ": expected array size is:<",
+          getMessage(message), "expected array size is:<",
           IntegerToString(expectedSize), "> but was:<",
           IntegerToString(actualSize), ">"
       );
@@ -316,12 +335,19 @@ static string MQLUNIT_Assert::assertArrayElement(
 ) {
   if (expected != actual) {
       return StringConcatenate(
-          message, ": expected array[", IntegerToString(i), "]:<",
+          getMessage(message), "expected array[", IntegerToString(i), "]:<",
           typename(expected), "#", &expected, "> but was:<", typename(actual),
           "#", &actual, ">"
       );
   }
   return NULL;
+}
+
+//-----------------------------------------------------------------------------
+
+string static MQLUNIT_Assert::getMessage(const string message) {
+    if (message == NULL) { return ""; }
+    return StringConcatenate(message, ": ");
 }
 
 //-----------------------------------------------------------------------------

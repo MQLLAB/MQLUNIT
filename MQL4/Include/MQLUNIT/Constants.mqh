@@ -31,9 +31,23 @@
 
 //-----------------------------------------------------------------------------
 
-/// @brief The number of character to wrap the test progress output at.
+/// @brief The number of characters to wrap the test progress output at.
 /// Only applicable to text based output (console, terminal, text file).
 #define MQLUNIT_OUTPUT_WRAP 42
+
+/// @brief The maximum context length at which strings that aren't equal are
+/// going to be compacted in the assertion failure message.
+#define MQLUNIT_MAX_CONTEXT_LENGTH 20
+
+/// @brief Used to replace a common prefix in the output of the difference
+/// between two strings.
+#define MQLUNIT_ELLIPSIS "..."
+
+/// @brief Used to wrap the output of the difference between two strings.
+#define MQLUNIT_DELTA_END "]"
+
+/// @brief Used to wrap the output of the difference between two strings.
+#define MQLUNIT_DELTA_START "["
 
 //-----------------------------------------------------------------------------
 

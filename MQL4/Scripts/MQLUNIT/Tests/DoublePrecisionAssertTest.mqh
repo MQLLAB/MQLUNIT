@@ -32,7 +32,6 @@
 #include <MQLUNIT/MQLUNIT.mqh>
 #include <MQLLIB/Lang/Number.mqh>
 
-
 //-----------------------------------------------------------------------------
 
 class MQLUNIT_DoublePrecisionAssertTest : public MQLUNIT_TestCase {
@@ -41,6 +40,7 @@ public:
     MQLUNIT_DoublePrecisionAssertTest(string name) : MQLUNIT_TestCase(name) {};
 
     MQLUNIT_START
+
     //----------------------------------------
 
     TEST_START(AssertEqualsDelta) {
