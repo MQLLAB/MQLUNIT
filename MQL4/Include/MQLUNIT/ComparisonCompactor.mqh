@@ -77,9 +77,7 @@ string MQLUNIT_ComparisonCompactor::compact(const string message) {
     }
 
     findCommonPrefix();
-    //PrintFormat("expected=%s, actual=%s, prefix=%i", _expected, _actual, _prefix);
 	findCommonSuffix();
-    //PrintFormat("expected=%s, actual=%s, suffix=%i", _expected, _actual, _suffix);
 
 	string expected = compactString(_expected);
 	string actual= compactString(_actual);
