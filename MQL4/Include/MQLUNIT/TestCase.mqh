@@ -54,7 +54,7 @@
 ///     MathTest(string name) : MQLUNIT_TestCase(name) {};
 ///
 ///     void setUp() { a = 1.0; b = 2.0; };
-/// 
+///
 ///     MQLUNIT_START
 ///
 ///     TEST_START(Add) {
@@ -68,14 +68,10 @@
 /// @endcode
 /// The tests to be run can be collected into an @a MQLUNIT_TestSuite.<br>
 /// @code
-/// MyFirstTestCase  test1;
-/// MySecondTestCase test2;
-/// MyThirdTestCase  test3;
-///
 /// MQLUNIT_TestSuite suite;
-/// suite.addTest(&test1);
-/// suite.addTest(&test2);
-/// suite.addTest(&test3);
+/// suite.addTest(new MyFirstTestCase());
+/// suite.addTest(new MySecondTestCase());
+/// suite.addTest(new MyThirdTestCase());
 ///
 /// MQLUNIT_TerminalTestRunner runner;
 /// runner.run(&suite);
@@ -97,10 +93,10 @@ public:
 
     /// @brief Set up context before running a test.
     virtual void setUp() {};
-    
+
     /// @brief Clean up after the test run.
     virtual void tearDown() {};
-    
+
     /// @brief Runs the tests.
     /// @param result : collects the results of executing a test case
     /// @see #MQLUNIT_TestResult
