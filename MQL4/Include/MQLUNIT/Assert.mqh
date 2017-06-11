@@ -256,26 +256,26 @@ static string MQLUNIT_Assert::assertEqualsDelta(
 
 template <typename T>
 static string MQLUNIT_Assert::assertNotNull(string message, T entity) {
-    return entity == NULL ? message : NULL;
+    return entity == NULL ? fail(message) : NULL;
 }
 
 //-----------------------------------------------------------------------------
 
 template <typename T>
 static string MQLUNIT_Assert::assertNull(string message, T entity) {
-    return entity != NULL ? message : NULL;
+    return entity != NULL ? fail(message) : NULL;
 }
 
 //-----------------------------------------------------------------------------
 
 static string MQLUNIT_Assert::assertTrue(string message, bool condition) {
-    return condition ? NULL : message;
+    return condition ? NULL : fail(message);
 }
 
 //-----------------------------------------------------------------------------
 
 static string MQLUNIT_Assert::assertFalse(string message, bool condition) {
-    return condition ? message : NULL;
+    return condition ? fail(message) : NULL;
 }
 
 //-----------------------------------------------------------------------------

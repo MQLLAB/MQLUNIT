@@ -143,6 +143,24 @@
 
 //-----------------------------------------------------------------------------
 
+/// @brief Asserts that the number @a actual is equal to the entity @a
+/// expected in respect to @a delta.
+#define ASSERT_EQUALS_DELTA(message, expected, actual, delta)                \
+    if (!__failed__) {                                                       \
+        string __message__ = MQLUNIT_Assert::assertEqualsDelta(              \
+            message, expected, actual, delta                                 \
+        );                                                                   \
+        if (__message__ != NULL) {                                           \
+            __result__.addFailure(                                           \
+                new MQLUNIT_TestFailure(                                     \
+                    &this, __FILE__, __LINE__, __testName__, __message__     \
+                )                                                            \
+            );                                                               \
+            __failed__ = true;                                               \
+        }                                                                    \
+    }
+
+//-----------------------------------------------------------------------------
 /// @brief Starts the MQLUNIT test block definition.
 #define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {    \
 

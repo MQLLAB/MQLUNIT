@@ -37,7 +37,7 @@
 
 class MQLUNIT_Tests_TestCaseTest : public MQLUNIT_TestCase {
 public:
-    MQLUNIT_Tests_TestCaseTest() : MQLUNIT_TestCase(typename(this)) {};
+    MQLUNIT_Tests_TestCaseTest() : MQLUNIT_TestCase(typename(this))  {};
     MQLUNIT_Tests_TestCaseTest(string name) : MQLUNIT_TestCase(name) {};
 
     MQLUNIT_START
