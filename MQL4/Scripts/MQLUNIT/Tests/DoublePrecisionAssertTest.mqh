@@ -26,18 +26,21 @@
 
 #property strict
 
-#ifndef SCRIPTS_MQLUNIT_DOUBLEPRECISIONASSERTTEST_MQH
-#define SCRIPTS_MQLUNIT_DOUBLEPRECISIONASSERTTEST_MQH
+#ifndef SCRIPTS_MQLUNIT_TESTS_DOUBLEPRECISIONASSERTTEST_MQH
+#define SCRIPTS_MQLUNIT_TESTS_DOUBLEPRECISIONASSERTTEST_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 #include <MQLLIB/Lang/Number.mqh>
 
 //-----------------------------------------------------------------------------
 
-class MQLUNIT_DoublePrecisionAssertTest : public MQLUNIT_TestCase {
+class MQLUNIT_Tests_DoublePrecisionAssertTest : public MQLUNIT_TestCase {
 public:
-    MQLUNIT_DoublePrecisionAssertTest() : MQLUNIT_TestCase(typename(this)) {};
-    MQLUNIT_DoublePrecisionAssertTest(string name) : MQLUNIT_TestCase(name) {};
+    MQLUNIT_Tests_DoublePrecisionAssertTest()
+        : MQLUNIT_TestCase(typename(this)) {};
+
+    MQLUNIT_Tests_DoublePrecisionAssertTest(string name)
+        : MQLUNIT_TestCase(name) {};
 
     MQLUNIT_START
 

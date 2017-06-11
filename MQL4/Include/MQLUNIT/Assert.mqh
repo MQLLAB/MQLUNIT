@@ -159,12 +159,15 @@ public:
 
     /// @brief Fail the test providing a genertc failure description.
     /// @return Generic failure description ("Assertion failed")
-    static string fail() { return fail("Assertion failed"); };
+    static string fail() { return fail(NULL); };
 
     /// @brief Fail the test providing a specific failure description.
     /// @param message : failure description
     /// @return Failure description
-    static string fail(string message) { return message; };
+    static string fail(string message) {
+        if (message == NULL) { return "Assertion failed"; }
+        return message;
+    };
 
     /// @brief Helper function made public for code reuse.
     ///

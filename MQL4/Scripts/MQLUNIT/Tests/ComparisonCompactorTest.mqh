@@ -26,17 +26,20 @@
 
 #property strict
 
-#ifndef MQLUNIT_COMPARIONCOMPARATORTEST_MQH
-#define MQLUNIT_COMPARIONCOMPARATORTEST_MQH
+#ifndef SCRIPTS_MQLUNIT_TESTS_COMPARIONCOMPARATORTEST_MQH
+#define SCRIPTS_MQLUNIT_TESTS_COMPARIONCOMPARATORTEST_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
 //-----------------------------------------------------------------------------
 
-class MQLUNIT_ComparisonCompactorTest : public MQLUNIT_TestCase {
+class MQLUNIT_Tests_ComparisonCompactorTest : public MQLUNIT_TestCase {
 public:
-    MQLUNIT_ComparisonCompactorTest() : MQLUNIT_TestCase(typename(this)) {};
-    MQLUNIT_ComparisonCompactorTest(string name) : MQLUNIT_TestCase(name) {};
+    MQLUNIT_Tests_ComparisonCompactorTest()
+        : MQLUNIT_TestCase(typename(this)) {};
+
+    MQLUNIT_Tests_ComparisonCompactorTest(string name)
+        : MQLUNIT_TestCase(name) {};
 
     MQLUNIT_START
 

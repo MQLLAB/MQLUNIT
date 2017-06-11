@@ -52,34 +52,34 @@ private:
 public:
     /// @brief Constructor
     MQLUNIT_ConsoleTestRunner() : _charCount(0) {};
-    
+
     /// @brief Destructor
     ~MQLUNIT_ConsoleTestRunner() {};
-  
+
     // MQLUNIT_TestListener implementation {
 
     /// @brief Registeres a test failure.
     /// @param failure : failure details
     /// @see MQLUNIT_TestFailure
     void addFailure(MQLUNIT_TestFailure* failure);
-    
+
     /// @brief Test started event.
     /// @param name : name of a test
     void startTest(const string name);
-    
+
     /// @brief Test ended event.
     /// @param name : name of a test
     void endTest(const string name) {};
 
     // }
- 
+
     // MQLUNIT_TestRunner implementation {
 
     /// @brief Run a test and output the result to the console.
     /// @param test : a test to run
     /// @see MQLUNIT_Test
     void run(MQLUNIT_Test* test);
-    
+
     // }
 
 private:
@@ -126,16 +126,16 @@ void MQLUNIT_ConsoleTestRunner::addFailure(MQLUNIT_TestFailure* failure) {
 void MQLUNIT_ConsoleTestRunner::run(MQLUNIT_Test* test) {
     MQLUNIT_TestResult result;
     result.addListener(&this);
-  
+
     double startTime = GetTickCount();
     test.run(&result);
     double endTime = GetTickCount();
-  
+
     MQLLIB_Utils_Console::writeLine();
     MQLLIB_Utils_Console::writeLine(
         StringFormat("Time %.3f", (endTime - startTime) / 1000)
     );
-  
+
     if (_failures.size() > 0) {
         printFailureCount(_failures.size());
         int count = 1;
@@ -153,16 +153,16 @@ void MQLUNIT_ConsoleTestRunner::run(MQLUNIT_Test* test) {
         MQLLIB_Utils_Console::writeLine("FAILURES!!!");
         MQLLIB_Utils_Console::writeLine(
             StringFormat(
-                "Tests run: %i,  Failures: %i",
-                result.countRunTests(), _failures.size()
+                "Tests run: %i,  Failures: %i", result.runCount(),
+                _failures.size()
             )
         );
     } else {
         MQLLIB_Utils_Console::writeLine(
-            StringFormat("OK (%i tests)", result.countRunTests())
+            StringFormat("OK (%i tests)", result.runCount())
         );
     }
-  
+
     MQLLIB_Utils_Console::writeLine();
 }
 

@@ -144,7 +144,12 @@
 //-----------------------------------------------------------------------------
 
 /// @brief Starts the MQLUNIT test block definition.
-#define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {
+#define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {    \
+
+//-----------------------------------------------------------------------------
+
+/// @brief Enables running inherited tests from the superclass.
+#define MQLUNIT_INHERIT(super) super::run(__result__);                      \
 
 //-----------------------------------------------------------------------------
 

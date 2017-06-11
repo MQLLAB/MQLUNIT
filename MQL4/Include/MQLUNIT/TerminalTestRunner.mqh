@@ -56,18 +56,18 @@ public:
 
     /// @brief Destructor
     ~MQLUNIT_TerminalTestRunner() {};
-  
+
     // MQLUNIT_TestListener implementation {
 
     /// @brief Registeres a test failure.
     /// @param failure : failure details
     /// @see MQLUNIT_TestFailure
     void addFailure(MQLUNIT_TestFailure* failure);
-    
+
     /// @brief Test started event.
     /// @param name : name of a test
     void startTest(const string name);
-    
+
     /// @brief Test ended event.
     /// @param name : name of a test
     void endTest(const string name) {};
@@ -80,9 +80,9 @@ public:
     /// @param test : a test to run
     /// @see MQLUNIT_Test
     void run(MQLUNIT_Test* test);
-    
+
     // }
-  
+
     /// @brief Enable or disable alerts window pop up in case of a test
     /// failure.
     /// @param alertsEnabled : set to true to enable alerts, set to false to
@@ -153,14 +153,14 @@ void MQLUNIT_TerminalTestRunner::run(MQLUNIT_Test* test) {
     MQLUNIT_TestResult result;
     result.addListener(&this);
     Print("");
-  
+
     double startTime = GetTickCount();
     test.run(&result);
     double endTime = GetTickCount();
-  
+
     Print(_output);
     PrintFormat("Time %.3f", (endTime - startTime) / 1000);
-  
+
     if (_failures.size() > 0) {
         printFailureCount(_failures.size());
         uint count = 1;
@@ -170,11 +170,11 @@ void MQLUNIT_TerminalTestRunner::run(MQLUNIT_Test* test) {
         }
 
         Print("FAILURES!!!");
-        PrintFormat("Tests run: %i,  Failures: %i", result.countRunTests(),
+        PrintFormat("Tests run: %i,  Failures: %i", result.runCount(),
         _failures.size());
         Print("");
     } else {
-        PrintFormat("OK (%i tests)", result.countRunTests());
+        PrintFormat("OK (%i tests)", result.runCount());
         Print("");
     }
 }

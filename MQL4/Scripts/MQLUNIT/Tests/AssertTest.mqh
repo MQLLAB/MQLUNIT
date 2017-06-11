@@ -26,20 +26,22 @@
 
 #property strict
 
-#ifndef SCRIPTS_MQLUNIT_ASSERTTEST_MQH
-#define SCRIPTS_MQLUNIT_ASSERTTEST_MQH
+#ifndef SCRIPTS_MQLUNIT_TESTS_ASSERTTEST_MQH
+#define SCRIPTS_MQLUNIT_TESTS_ASSERTTEST_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 #include <MQLLIB/Lang/Pointer.mqh>
+
+#include "TestData.mqh"
 
 //-----------------------------------------------------------------------------
 
 // Test for the Assert class. All other tests rely on the assertion system,
 // therefore this test case must be run prior to any other test case.
-class MQLUNIT_AssertTest : public MQLUNIT_TestCase {
+class MQLUNIT_Tests_AssertTest : public MQLUNIT_TestCase {
 public:
-    MQLUNIT_AssertTest() : MQLUNIT_TestCase(typename(this)) {};
-    MQLUNIT_AssertTest(string name) : MQLUNIT_TestCase(name) {};
+    MQLUNIT_Tests_AssertTest() : MQLUNIT_TestCase(typename(this)) {};
+    MQLUNIT_Tests_AssertTest(string name) : MQLUNIT_TestCase(name) {};
 
     MQLUNIT_START
 
@@ -746,28 +748,6 @@ public:
 
     MQLUNIT_END
 };
-
-//-----------------------------------------------------------------------------
-
-class __Object__ {
-private:
-  int _data;
-public:
-  __Object__() : _data(-1) {};
-  __Object__(int data) : _data(data) {};
-  void operator=(const __Object__& that) { this._data = that._data; };
-  bool operator !=(const __Object__& that) const {
-      return this._data != that._data;
-  };
-  bool operator ==(const __Object__* that) const {
-      return this._data == that._data;
-  };
-
-};
-
-//-----------------------------------------------------------------------------
-
-class __AnotherObject__ {};
 
 //-----------------------------------------------------------------------------
 

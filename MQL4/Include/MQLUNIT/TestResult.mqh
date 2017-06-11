@@ -50,7 +50,7 @@ private:
 public:
     /// @brief Constructor
     MQLUNIT_TestResult() : _runTests(0) {};
-    
+
     /// @brief Registeres a test listener.
     /// @param listener : test listener
     /// @see MQLUNIT_TestListener
@@ -64,20 +64,24 @@ public:
     /// @param failure : failure details
     /// @see MQLUNIT_TestFailure
     void addFailure(MQLUNIT_TestFailure* failure);
-    
-    /// @brief Informs the result that a test was started. 
+
+    /// @brief Informs the result that a test was started.
     /// @param name : test name
     void startTest(const string name);
-    
-    /// @brief Informs the result that a test was completed. 
+
+    /// @brief Informs the result that a test was completed.
     /// @param name : test name
     void endTest(const string name);
-    
+
     // }
 
     /// @brief Returns a total number of tests run.
     /// @return total number of tests run
-    uint countRunTests() { return _runTests; };
+    uint runCount() const { return _runTests; };
+
+    /// @brief Returns a total number of failed tests.
+    /// @return total number of failed tests
+    uint failureCount()  const { return _failures.size(); }
 };
 
 //-----------------------------------------------------------------------------
