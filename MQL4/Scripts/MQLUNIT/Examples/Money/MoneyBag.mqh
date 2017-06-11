@@ -1,6 +1,6 @@
-/// @file   AllTests.mq4
+/// @file   MoneyBag.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  MQLUNIT examples : MoneyBag class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -24,26 +24,36 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
+
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEY_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEY_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "SimpleTest.mqh"
-#include "ListTest.mqh"
-#include "Money/MoneyTest.mqh"
+#include "IMoney.mqh"
+#include "Money.mqh"
+
+/// @brief A MoneyBag defers exchange rate conversions.
+///
+/// For example adding 12 Swiss Francs to 14 US Dollars is represented as a
+/// bag containing the two Monies 12 CHF and 14 USD. Adding another 10 Swiss
+/// francs gives a bag with 22 CHF and 14 USD. Due to the deferred exchange
+/// rate conversion we can later value a MoneyBag with different exchange
+/// rates.
+///
+/// A MoneyBag is represented as a list of Monies and provides different
+/// constructors to create a MoneyBag.
+class MQLUNIT_Examples_Money_MoneyBag : public MQLUNIT_Examples_Money_IMoney  {
+public:
+    MQLUNIT_Examples_Money_MoneyBag() {};
+    MQLUNIT_Examples_Money_MoneyBag(const MQLUNIT_Examples_Money_Money& that);
+    virtual ~MQLUNIT_Examples_Money_MoneyBag() {};
+
+    void operator =(const MQLUNIT_Examples_Money_MoneyBag& that);
+    bool operator ==(const MQLUNIT_Examples_Money_MoneyBag& that);
+};
 
 //-----------------------------------------------------------------------------
 
-void OnStart() {
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Examples_ListTest());
-    suite.addTest(new MQLUNIT_Examples_SimpleTest());
-    suite.addTest(new MQLUNIT_Examples_Money_MoneyTest());
-
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
-}
-//-----------------------------------------------------------------------------
+#endif

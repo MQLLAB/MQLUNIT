@@ -29,9 +29,6 @@
 #ifndef SCRIPTS_MQLUNIT_EXAMPLES_SIMPLETEST_MQH
 #define SCRIPTS_MQLUNIT_EXAMPLES_SIMPLETEST_MQH
 
-#include <Object.mqh>
-#include <Arrays/List.mqh>
-#include <MQLLIB/Lang/Pointer.mqh>
 #include <MQLUNIT/MQLUNIT.mqh>
 
 //-----------------------------------------------------------------------------

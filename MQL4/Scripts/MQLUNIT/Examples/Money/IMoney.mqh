@@ -1,6 +1,6 @@
-/// @file   AllTests.mq4
+/// @file   IMoney.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  MQLUNIT examples : IMoney interface definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -24,26 +24,19 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
+
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_MONEY_IMONEY_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_IMONEY_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "SimpleTest.mqh"
-#include "ListTest.mqh"
-#include "Money/MoneyTest.mqh"
+//-----------------------------------------------------------------------------
+
+/// @brief The common interface for simple Monies and MoneyBags.
+class MQLUNIT_Examples_Money_IMoney {
+};
 
 //-----------------------------------------------------------------------------
 
-void OnStart() {
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Examples_ListTest());
-    suite.addTest(new MQLUNIT_Examples_SimpleTest());
-    suite.addTest(new MQLUNIT_Examples_Money_MoneyTest());
-
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
-}
-//-----------------------------------------------------------------------------
+#endif
