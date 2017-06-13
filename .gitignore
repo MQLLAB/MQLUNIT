@@ -13,7 +13,8 @@ tester
 terminal.exe
 terminal.ico
 metaeditor.exe
-uninstaller.exe
+uninstall.exe
+*.lnk
 !MQL4/
 MQL4/*
 !MQL4/Include/

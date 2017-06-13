@@ -29,6 +29,11 @@
 #ifndef MQLUNIT_ASSERT_MQH
 #define MQLUNIT_ASSERT_MQH
 
+#include <MQLLIB/Lang/Number.mqh>
+
+#include "Constants.mqh"
+#include "ComparisonCompactor.mqh"
+
 //-----------------------------------------------------------------------------
 
 /// @brief A set of assert methods.
@@ -50,22 +55,32 @@ public:
     /// @see MQLUNIT_Assert::assertNull
     template <typename T>
     static string assertEquals(string message, T& expected, T& actual);
-    
+
     /// @brief Asserts that two entities are equal.
     /// @param message  : assertion description
     /// @param expected : expected value
     /// @param actual   : actual value
+<<<<<<< HEAD
     /// @return NULL on success or the failure description   
+=======
+    /// @return NULL on success or the failure description
+>>>>>>> f1df1eedb53836041f0c9d2e9c58d928c4fba980
     // We must define one of the assertEqual overloads in class
     // definition and one separately to avoid the compiler complaints
     // about not being able to overload a template function (which it does
     // just fine when we separate definition like this).
     template <typename T>
     static string assertEquals(string message, T expected, T actual) {
-        if (expected != actual) {
+        if (expected != actual && typename(expected) != "string") {
             return StringConcatenate(
-                message, ": expected:<", expected, "> but was:<", actual, ">"
+                getMessage(message), "expected:<", expected, "> but was:<",
+                actual, ">"
             );
+        } else if (expected != actual) {
+            MQLUNIT_ComparisonCompactor compactor(
+                MQLUNIT_MAX_CONTEXT_LENGTH, (string) expected, (string) actual
+            );
+            return compactor.compact(message);
         }
         return NULL;
     };
@@ -73,7 +88,7 @@ public:
     /// @brief Assert that two arrays are equal.
     /// Arrays are considered equal if they have the same size and their
     /// elements are equal in each position. Equality check for the elements
-    /// will work with primitive types, strings, object references and pointers. 
+    /// will work with primitive types, strings, object references and pointers.
     /// @param expected : expected array
     /// @param actual   : actual array
     /// @param message  : assertion description
@@ -93,7 +108,7 @@ public:
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertSame(string message, T& expected, T& actual);
-  
+
     /// @brief Asserts that two object references do bot refer to the same
     /// object.
     /// Object are passed by reference. Pointers must be dereferenced to
@@ -105,7 +120,7 @@ public:
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertNotSame(string message, T& expected, T& actual);
-  
+
     /// @brief Asserts that the entity is not NULL.
     /// Entity can be a variable of a primitive type, object reference or a
     /// pointer.
@@ -114,7 +129,7 @@ public:
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertNotNull(string message, T entity);
-    
+
     /// @brief Asserts that the entity is NULL.
     /// Entity can be a variable of a primitive type, object reference or a
     /// pointer.
@@ -123,27 +138,49 @@ public:
     /// @return NULL on success or the failure description
     template <typename T>
     static string assertNull(string message, T entity);
-  
+
     /// @brief Asserts that the condition is true.
     /// @param message   : assertion description
     /// @param condition : boolean expression to check
     /// @return NULL on success or the failure description
     static string assertTrue(string message, bool condition);
-  
+
+    /// @brief Asserts that two doubles are equal concerning a delta.
+    /// @param message  : assertion description
+    /// @param expected : expected value
+    /// @param actual   : actual value
+    /// @param delta    : allowed error
+    /// @return NULL on success or the failure description
+    static string assertEqualsDelta(
+        string message, double expected, double actual, double delta
+    );
+
     /// @brief Asserts that the condition is false
     /// @param message   : assertion description
     /// @param condition : boolean expression to check
     /// @return NULL on success or the failure description
     static string assertFalse(string message, bool condition);
-  
+
     /// @brief Fail the test providing a genertc failure description.
     /// @return Generic failure description ("Assertion failed")
-    static string fail() { return fail("Assertion failed"); };
-    
+    static string fail() { return fail(NULL); };
+
     /// @brief Fail the test providing a specific failure description.
     /// @param message : failure description
     /// @return Failure description
-    static string fail(string message) { return message; };
+    static string fail(string message) {
+        if (message == NULL) { return "Assertion failed"; }
+        return message;
+    };
+
+    /// @brief Helper function made public for code reuse.
+    ///
+    /// Not a part of the API. Maybe removed at any time.
+    ///
+    /// @note Since MQL doesn't suport friend classes, we are forced to make
+    /// some "private" helper methods "public" to avoid copying and pasting
+    /// the same code to multiple classes.
+    static string getMessage(const string message);
 
 private:
     template <typename T>
@@ -161,13 +198,12 @@ private:
     ) {
         if (expected != actual) {
             return StringConcatenate(
-                message, ": expected array[", IntegerToString(i),"]:<",
-                expected, "> but was:<", actual, ">"
+                getMessage(message), "expected array[", IntegerToString(i),
+                "]:<", expected, "> but was:<", actual, ">"
             );
         }
         return NULL;
     };
-
 };
 
 //-----------------------------------------------------------------------------
@@ -178,8 +214,43 @@ static string MQLUNIT_Assert::assertEquals(
 ) {
     if (expected != actual) {
         return  StringConcatenate(
-            message, ": expected:<", typename(expected), "#", &expected,
-            "> but was:<", typename(actual), "#", &actual, ">"
+            getMessage(message), "expected:<", typename(expected), "#",
+            &expected, "> but was:<", typename(actual), "#", &actual, ">"
+        );
+    }
+    return NULL;
+}
+
+//-----------------------------------------------------------------------------
+
+static string MQLUNIT_Assert::assertEqualsDelta(
+    string message, double expected, double actual, double delta
+) {
+    // by definition NaN is equal to NaN
+    if (MQLLIB_Lang_Double::isNaN(expected)
+        && MQLLIB_Lang_Double::isNaN(actual)
+    ) {
+        return NULL;
+    }
+
+    // by definition positive infinity equals negative infinity
+    if (MQLLIB_Lang_Double::isPositiveInfinity(expected)
+        && MQLLIB_Lang_Double::isPositiveInfinity(actual)
+    ) {
+        return NULL;
+    }
+
+    // by definition negative infinity equals negative infinity
+    if (MQLLIB_Lang_Double::isNegativeInfinity(expected)
+        && MQLLIB_Lang_Double::isNegativeInfinity(actual)
+    ) {
+        return NULL;
+    }
+
+    if (!(MathAbs(expected - actual) <= delta)) {
+        return  StringConcatenate(
+            getMessage(message), "expected:<", expected, "> but was:<",
+            actual, ">"
         );
     }
     return NULL;
@@ -189,26 +260,26 @@ static string MQLUNIT_Assert::assertEquals(
 
 template <typename T>
 static string MQLUNIT_Assert::assertNotNull(string message, T entity) {
-    return entity == NULL ? message : NULL;
+    return entity == NULL ? fail(message) : NULL;
 }
 
 //-----------------------------------------------------------------------------
 
 template <typename T>
 static string MQLUNIT_Assert::assertNull(string message, T entity) {
-    return entity != NULL ? message : NULL;
+    return entity != NULL ? fail(message) : NULL;
 }
 
 //-----------------------------------------------------------------------------
 
 static string MQLUNIT_Assert::assertTrue(string message, bool condition) {
-    return condition ? NULL : message;
+    return condition ? NULL : fail(message);
 }
 
 //-----------------------------------------------------------------------------
 
 static string MQLUNIT_Assert::assertFalse(string message, bool condition) {
-    return condition ? message : NULL;
+    return condition ? fail(message) : NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -219,7 +290,8 @@ static string MQLUNIT_Assert::assertSame(
 ) {
   if (GetPointer(expected) != GetPointer(actual)) {
       return StringConcatenate(
-          message, ": expected same:<", &expected , "> was not:<", &actual, ">"
+          getMessage(message), "expected same:<", &expected , "> was not:<",
+          &actual, ">"
       );
   }
   return NULL;
@@ -232,7 +304,7 @@ static string MQLUNIT_Assert::assertNotSame(
     string message, T& expected, T& actual
 ) {
     if (GetPointer(expected) == GetPointer(actual)) {
-        return StringConcatenate(message, ": expected not same");
+        return StringConcatenate(getMessage(message), "expected not same");
     }
   return NULL;
 }
@@ -248,7 +320,7 @@ static string MQLUNIT_Assert::assertEquals(
 
   if (expectedSize != actualSize) {
       return StringConcatenate(
-          message , ": expected array size is:<",
+          getMessage(message), "expected array size is:<",
           IntegerToString(expectedSize), "> but was:<",
           IntegerToString(actualSize), ">"
       );
@@ -270,12 +342,19 @@ static string MQLUNIT_Assert::assertArrayElement(
 ) {
   if (expected != actual) {
       return StringConcatenate(
-          message, ": expected array[", IntegerToString(i), "]:<",
+          getMessage(message), "expected array[", IntegerToString(i), "]:<",
           typename(expected), "#", &expected, "> but was:<", typename(actual),
           "#", &actual, ">"
       );
   }
   return NULL;
+}
+
+//-----------------------------------------------------------------------------
+
+string static MQLUNIT_Assert::getMessage(const string message) {
+    if (message == NULL) { return ""; }
+    return StringConcatenate(message, ": ");
 }
 
 //-----------------------------------------------------------------------------

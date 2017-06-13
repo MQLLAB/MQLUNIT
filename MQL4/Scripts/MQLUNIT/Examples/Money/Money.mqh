@@ -1,6 +1,6 @@
-/// @file   MQLUNITTest.mq4
+/// @file   Money.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  MQLUNIT examples : Money class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -24,36 +24,60 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
+
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEY_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEY_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "AssertTest.mqh"
-#include "DoublePrecisionAssertTest.mqh"
-#include "ComparisonCompactorTest.mqh"
-#include "TestCaseTest.mqh"
-#include "TestSuiteTest.mqh"
-#include "TestListenerTest.mqh"
-#include "TestImplementorTest.mqh"
+#include "IMoney.mqh"
+
+class MQLUNIT_Examples_Money_MoneyBag;
 
 //-----------------------------------------------------------------------------
 
-/// @brief MQLUNIT test suite executor entry point.
-/// Runs a complete MQLUNIT test suite using MQLUNIT (self-test).
-void OnStart() {
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Tests_AssertTest());
-    suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
-    suite.addTest(new MQLUNIT_Tests_ComparisonCompactorTest());
-    suite.addTest(new MQLUNIT_Tests_TestCaseTest());
-    suite.addTest(new MQLUNIT_Tests_TestSuiteTest());
-    suite.addTest(new MQLUNIT_Tests_TestListenerTest());
-    suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
-            
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
-}
+/// @brief A simple Money.
+class MQLUNIT_Examples_Money_Money : public MQLUNIT_Examples_Money_IMoney {
+private:
+    int    _amount;
+    string _currency;
+
+public:
+    MQLUNIT_Examples_Money_Money(int amount, string currency)
+        : _amount(amount), _currency(currency) {};
+
+    MQLUNIT_Examples_Money_Money(const MQLUNIT_Examples_Money_Money& that);
+
+    virtual ~MQLUNIT_Examples_Money_Money() {};
+
+    void operator =(const MQLUNIT_Examples_Money_Money& that);
+    bool operator ==(const MQLUNIT_Examples_Money_Money& that);
+
+    MQLUNIT_Examples_Money_Money addMoney(
+        const MQLUNIT_Examples_Money_Money& money
+    ) const;
+
+    MQLUNIT_Examples_Money_Money addMoneyBag(
+        const MQLUNIT_Examples_Money_MoneyBag& moneyBag
+    )  const;
+
+    int amount() const { return _amount; };
+    string currency() const { return _currency; };
+    bool isZero() const;
+
+    MQLUNIT_Examples_Money_Money multiply(const int factor) const;
+    MQLUNIT_Examples_Money_Money negate() const;
+
+    MQLUNIT_Examples_Money_Money subtract(
+        const MQLUNIT_Examples_Money_Money& money
+    ) const;
+
+    string toString() const {
+        return StringFormat("[%i %s]", _amount, _currency);
+    };
+};
+
 //-----------------------------------------------------------------------------
+
+#endif

@@ -1,6 +1,6 @@
-/// @file   MQLUNITTest.mq4
+/// @file   SimpleTest.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  MQLUNIT examples : SimpleTest class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -24,36 +24,57 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
+
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_SIMPLETEST_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_SIMPLETEST_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "AssertTest.mqh"
-#include "DoublePrecisionAssertTest.mqh"
-#include "ComparisonCompactorTest.mqh"
-#include "TestCaseTest.mqh"
-#include "TestSuiteTest.mqh"
-#include "TestListenerTest.mqh"
-#include "TestImplementorTest.mqh"
+//-----------------------------------------------------------------------------
+
+/// @brief Example MQLUNI test case.
+class MQLUNIT_Examples_SimpleTest : public MQLUNIT_TestCase {
+private:
+    int _value1;
+    int _value2;
+
+public:
+    MQLUNIT_Examples_SimpleTest() : MQLUNIT_TestCase(typename(this))  {};
+    MQLUNIT_Examples_SimpleTest(string name) : MQLUNIT_TestCase(name) {};
+
+    void setUp() {
+        _value1 = 2;
+        _value2 = 3;
+    }
+
+    MQLUNIT_START
+
+    //----------------------------------------
+
+    TEST_START(Add) {
+		double result = _value1 + _value2;
+        Print(result == 6.0);
+
+        // forced failure result == 5.0
+		ASSERT_TRUE(NULL, result == 6.0);
+    }
+    TEST_END
+
+    //----------------------------------------
+
+    TEST_START(Equals) {
+        ASSERT_EQUALS("Integers must be equal", (int) 12, (int) 12);
+        ASSERT_EQUALS("Doubles must be equal", 12.0, 12.0);
+        ASSERT_EQUALS_DELTA("Capacity", 12.0, 11.99, 0.1);
+    }
+    TEST_END
+
+    //----------------------------------------
+
+    MQLUNIT_END
+};
 
 //-----------------------------------------------------------------------------
 
-/// @brief MQLUNIT test suite executor entry point.
-/// Runs a complete MQLUNIT test suite using MQLUNIT (self-test).
-void OnStart() {
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Tests_AssertTest());
-    suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
-    suite.addTest(new MQLUNIT_Tests_ComparisonCompactorTest());
-    suite.addTest(new MQLUNIT_Tests_TestCaseTest());
-    suite.addTest(new MQLUNIT_Tests_TestSuiteTest());
-    suite.addTest(new MQLUNIT_Tests_TestListenerTest());
-    suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
-            
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
-}
-//-----------------------------------------------------------------------------
+#endif

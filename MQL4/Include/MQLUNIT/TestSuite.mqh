@@ -46,14 +46,10 @@
 /// <br>
 /// Example usage:<br>
 /// @code
-/// MyFirstTestCase  test1;
-/// MySecondTestCase test2;
-/// MyThirdTestCase  test3;
-///
 /// MQLUNIT_TestSuite suite;
-/// suite.addTest(&test1);
-/// suite.addTest(&test2);
-/// suite.addTest(&test3);
+/// suite.addTest(new MyFirstTestCase());
+/// suite.addTest(new MySecondTestCase());
+/// suite.addTest(new MyThirdTestCase());
 ///
 /// MQLUNIT_TerminalTestRunner runner;
 /// runner.run(&suite);

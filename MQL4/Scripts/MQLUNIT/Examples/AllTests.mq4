@@ -1,4 +1,4 @@
-/// @file   MQLUNITTest.mq4
+/// @file   AllTests.mq4
 /// @author Copyright 2017, Eneset Group Trust
 /// @brief  MQLUNIT test suite executor script.
 
@@ -31,28 +31,18 @@
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "AssertTest.mqh"
-#include "DoublePrecisionAssertTest.mqh"
-#include "ComparisonCompactorTest.mqh"
-#include "TestCaseTest.mqh"
-#include "TestSuiteTest.mqh"
-#include "TestListenerTest.mqh"
-#include "TestImplementorTest.mqh"
+#include "SimpleTest.mqh"
+#include "ListTest.mqh"
+#include "Money/MoneyTest.mqh"
 
 //-----------------------------------------------------------------------------
 
-/// @brief MQLUNIT test suite executor entry point.
-/// Runs a complete MQLUNIT test suite using MQLUNIT (self-test).
 void OnStart() {
     MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Tests_AssertTest());
-    suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
-    suite.addTest(new MQLUNIT_Tests_ComparisonCompactorTest());
-    suite.addTest(new MQLUNIT_Tests_TestCaseTest());
-    suite.addTest(new MQLUNIT_Tests_TestSuiteTest());
-    suite.addTest(new MQLUNIT_Tests_TestListenerTest());
-    suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
-            
+    suite.addTest(new MQLUNIT_Examples_ListTest());
+    suite.addTest(new MQLUNIT_Examples_SimpleTest());
+    suite.addTest(new MQLUNIT_Examples_Money_MoneyTest());
+
     MQLUNIT_TerminalTestRunner runner;
     runner.run(&suite);
 }

@@ -1,6 +1,6 @@
-/// @file   MQLUNITTest.mq4
+/// @file   Cast.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  Casting functions a-la C++.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -24,36 +24,42 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
 
-#include <MQLUNIT/MQLUNIT.mqh>
-
-#include "AssertTest.mqh"
-#include "DoublePrecisionAssertTest.mqh"
-#include "ComparisonCompactorTest.mqh"
-#include "TestCaseTest.mqh"
-#include "TestSuiteTest.mqh"
-#include "TestListenerTest.mqh"
-#include "TestImplementorTest.mqh"
+#ifndef MQLLIB_LANG_CASE_MQH
+#define MQLLIB_LANG_CAST_MQH
 
 //-----------------------------------------------------------------------------
 
-/// @brief MQLUNIT test suite executor entry point.
-/// Runs a complete MQLUNIT test suite using MQLUNIT (self-test).
-void OnStart() {
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Tests_AssertTest());
-    suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
-    suite.addTest(new MQLUNIT_Tests_ComparisonCompactorTest());
-    suite.addTest(new MQLUNIT_Tests_TestCaseTest());
-    suite.addTest(new MQLUNIT_Tests_TestSuiteTest());
-    suite.addTest(new MQLUNIT_Tests_TestListenerTest());
-    suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
-            
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
+/// @brief Cast any value type to another value type.
+/// @param f : value to convert from
+/// @param t : value to convert to
+template<typename F, typename T>
+void reinterpret_cast(const F& f, T& t) {
+    union _u {
+      F from;
+      const T to;
+    } u;
+    u.from = f;
+    t = u.to;
 }
+
 //-----------------------------------------------------------------------------
+
+/// @brief Convert any value type to byte array.
+/// @param value : value to convert
+/// @param a     : destination array
+/// @param start : index starting from which to copy
+template<typename T>
+void byte_cast(const T& value, uchar& a[], int start = 0) {
+    union _u {
+      T from;
+      const uchar to[sizeof(T)];
+    } u;
+    u.from = value;
+    ArrayCopy(a, u.to, start);
+}
+
+//-----------------------------------------------------------------------------
+
+#endif

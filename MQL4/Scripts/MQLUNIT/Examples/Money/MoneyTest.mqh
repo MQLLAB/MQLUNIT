@@ -1,6 +1,6 @@
-/// @file   MQLUNITTest.mq4
+/// @file   MoneyTest.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  MQLUNIT examples : MoneyTest class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -24,36 +24,35 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
+
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEYTEST_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEYTEST_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "AssertTest.mqh"
-#include "DoublePrecisionAssertTest.mqh"
-#include "ComparisonCompactorTest.mqh"
-#include "TestCaseTest.mqh"
-#include "TestSuiteTest.mqh"
-#include "TestListenerTest.mqh"
-#include "TestImplementorTest.mqh"
+#include "Money.mqh"
 
 //-----------------------------------------------------------------------------
 
-/// @brief MQLUNIT test suite executor entry point.
-/// Runs a complete MQLUNIT test suite using MQLUNIT (self-test).
-void OnStart() {
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Tests_AssertTest());
-    suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
-    suite.addTest(new MQLUNIT_Tests_ComparisonCompactorTest());
-    suite.addTest(new MQLUNIT_Tests_TestCaseTest());
-    suite.addTest(new MQLUNIT_Tests_TestSuiteTest());
-    suite.addTest(new MQLUNIT_Tests_TestListenerTest());
-    suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
-            
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
-}
+/// @brief Example of testing a complex object behaviour with MQLUNIT.
+class MQLUNIT_Examples_Money_MoneyTest : public MQLUNIT_TestCase {
+public:
+    MQLUNIT_Examples_Money_MoneyTest() : MQLUNIT_TestCase(typename(this))  {};
+    MQLUNIT_Examples_Money_MoneyTest(string name) : MQLUNIT_TestCase(name) {};
+
+    void setUp() {
+    }
+
+    MQLUNIT_START
+
+    //----------------------------------------
+
+    //----------------------------------------
+
+    MQLUNIT_END
+};
+
 //-----------------------------------------------------------------------------
+
+#endif

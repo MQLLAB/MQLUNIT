@@ -1,9 +1,9 @@
-/// @file   MQLUNITTest.mq4
+/// @file   TestImplementorTest.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  Test case for MQLUNIT_Test class.
 
 //-----------------------------------------------------------------------------
-// Copyright 2017, Eneset Group Trust
+// Copyright 2017 Eneset Group Trust
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -24,36 +24,40 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
 
+#ifndef SCRIPTS_MQLUNIT_TESTS_TESTIMPLEMENTORTEST_MQH
+#ifndef SCRIPTS_MQLUNIT_TESTS_TESTIMPLEMENTORTEST_MQH
+
+#include <MQLLIB/Lang/Pointer.mqh>
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "AssertTest.mqh"
-#include "DoublePrecisionAssertTest.mqh"
-#include "ComparisonCompactorTest.mqh"
-#include "TestCaseTest.mqh"
-#include "TestSuiteTest.mqh"
-#include "TestListenerTest.mqh"
-#include "TestImplementorTest.mqh"
+#include "TestData.mqh"
 
 //-----------------------------------------------------------------------------
 
-/// @brief MQLUNIT test suite executor entry point.
-/// Runs a complete MQLUNIT test suite using MQLUNIT (self-test).
-void OnStart() {
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Tests_AssertTest());
-    suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
-    suite.addTest(new MQLUNIT_Tests_ComparisonCompactorTest());
-    suite.addTest(new MQLUNIT_Tests_TestCaseTest());
-    suite.addTest(new MQLUNIT_Tests_TestSuiteTest());
-    suite.addTest(new MQLUNIT_Tests_TestListenerTest());
-    suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
-            
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
-}
+class MQLUNIT_Tests_TestImplementorTest : public MQLUNIT_TestCase {
+public:
+    MQLUNIT_Tests_TestImplementorTest() : MQLUNIT_TestCase(typename(this)) {};
+    MQLUNIT_Tests_TestImplementorTest(string name) : MQLUNIT_TestCase(name) {};
+
+    MQLUNIT_START
+
+    //----------------------------------------
+
+    TEST_START(SuccessfulRun) {
+        __Test__ test;
+        MQLUNIT_TestResult result;
+        test.run(&result);
+        ASSERT_EQUALS(NULL, (uint) 0, result.runCount());
+        ASSERT_EQUALS(NULL, (uint) 0, result.failureCount());
+        ASSERT_TRUE(NULL, test.wasRun());
+    }
+    TEST_END
+
+    MQLUNIT_END
+};
+
 //-----------------------------------------------------------------------------
+
+#endif

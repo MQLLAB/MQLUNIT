@@ -30,6 +30,7 @@
 #define MQLUNIT_MQLUNIT_MQH
 
 #include "Assert.mqh"
+#include "ComparisonCompactor.mqh"
 #include "ConsoleTestRunner.mqh"
 #include "Constants.mqh"
 #include "TerminalTestRunner.mqh"
@@ -118,10 +119,11 @@
 //-----------------------------------------------------------------------------
 
 /// @brief Asserts that the entity @a actual is equal to the entity @a expected.
-/// 
+///
 /// Entities can be values, strings, variables of the primitive types, object
 /// references, pointers or arrays of primitive types, object references or
 /// pointers.
+///
 /// @note Enumeration values, function pointers and arrays of enumeration
 /// values or function pointers are not supported and will generate an error
 /// during the compilation.
@@ -134,16 +136,39 @@
             new MQLUNIT_TestFailure(                                         \
                 &this, __FILE__, __LINE__, __testName__, __message__         \
             )                                                                \
-        )                                                                    \
-      __failed__ = true;                                                     \
+        );                                                                   \
+        __failed__ = true;                                                   \
     }                                                                        \
 }
 
 //-----------------------------------------------------------------------------
 
+/// @brief Asserts that the number @a actual is equal to the entity @a
+/// expected in respect to @a delta.
+#define ASSERT_EQUALS_DELTA(message, expected, actual, delta)                \
+    if (!__failed__) {                                                       \
+        string __message__ = MQLUNIT_Assert::assertEqualsDelta(              \
+            message, expected, actual, delta                                 \
+        );                                                                   \
+        if (__message__ != NULL) {                                           \
+            __result__.addFailure(                                           \
+                new MQLUNIT_TestFailure(                                     \
+                    &this, __FILE__, __LINE__, __testName__, __message__     \
+                )                                                            \
+            );                                                               \
+            __failed__ = true;                                               \
+        }                                                                    \
+    }
+
+//-----------------------------------------------------------------------------
 /// @brief Starts the MQLUNIT test block definition.
-#define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {
-     
+#define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {    \
+
+//-----------------------------------------------------------------------------
+
+/// @brief Enables running inherited tests from the superclass.
+#define MQLUNIT_INHERIT(super) super::run(__result__);                      \
+
 //-----------------------------------------------------------------------------
 
 /// @brief Defines a beginning of test with a @a name.
