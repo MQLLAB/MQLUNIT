@@ -172,18 +172,18 @@
 //-----------------------------------------------------------------------------
 
 /// @brief Defines a beginning of test with a @a name.
-#define TEST_START(name) {                                                   \
-    string __testName__ = StringConcatenate("test", #name);                  \
-    bool __failed__ = false;                                                 \
-    setUp();                                                                 \
+#define TEST_START(name) {                                                  \
+    string __testName__ = StringConcatenate("test", #name);                 \
+    bool __failed__ = false;                                                \
+    setUp();                                                                \
     __result__.startTest(__testName__);
 
 //-----------------------------------------------------------------------------
 
 /// @brief Defines an end of a test.
-#define TEST_END ;                                                           \
-    __result__.endTest(__testName__);                                        \
-    tearDown();                                                              \
+#define TEST_END ;                                                          \
+    __result__.endTest(__testName__);                                       \
+    tearDown();                                                             \
 }
 
 //-----------------------------------------------------------------------------
