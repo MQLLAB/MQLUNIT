@@ -1,6 +1,6 @@
-/// @file   Kernel32.mqh
+/// @file   WinMM.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  Win32 API : kernel32.dll
+/// @brief  Win32 API : winmm.dll
 
 //-----------------------------------------------------------------------------
 // Copyright 2017 Eneset Group Trust
@@ -26,39 +26,41 @@
 
 #property strict
 
-#ifndef MQLLIB_WIN32_KERNEL32_MQH
-#define MQLLIB_WIN32_KERNEL32_MQH
+#ifndef MQLLIB_WIN32_WINMM_MQH
+#define MQLLIB_WIN32_WINMM_MQH
 
 //-----------------------------------------------------------------------------
 
-#define STD_INPUT_HANDLE        -10
-#define STD_OUTPUT_HANDLE       -11
-#define STD_ERROR_HANDLE        -12
-#define ATTACH_PARENT_PROCESS    -1
+#define SND_SYNC        0x00
+#define SND_ASYNC       0x01
+#define SND_NODEFAULT   0x02
+#define SND_MEMORY      0x04
+#define SND_LOOP        0x08
+#define SND_NOSTOP      0x10
+#define SND_NOWAIT	    0x00002000
+#define SND_ALIAS       0x00010000
+#define SND_ALIAS_ID    0x000110000
+#define SND_FILENAME    0x00020000
+#define SND_RESOURCE    0x00040004
+#define SND_PURGE       0x40
+#define SND_APPLICATION 0x80
+#define SND_ALIAS_START 0x00
+#define	sndAlias(c0,c1)	                                                     \
+    (SND_ALIAS_START+((int)(ushort)(c0)|((int)(ushort)(c1)<<8)))
+#define SND_ALIAS_SYSTEMASTERISK    sndAlias('S','*')
+#define SND_ALIAS_SYSTEMQUESTION    sndAlias('S','?')
+#define SND_ALIAS_SYSTEMHAND        sndAlias('S','H')
+#define SND_ALIAS_SYSTEMEXIT        sndAlias('S','E')
+#define SND_ALIAS_SYSTEMSTART       sndAlias('S','S')
+#define SND_ALIAS_SYSTEMWELCOME     sndAlias('S','W')
+#define SND_ALIAS_SYSTEMEXCLAMATION sndAlias('S','!')
+#define SND_ALIAS_SYSTEMDEFAULT     sndAlias('S','D')
 
 //-----------------------------------------------------------------------------
 
-#import "kernel32.dll"
-/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/ms681944.aspx
-bool AllocConsole();
-/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/ms683150.aspx
-bool FreeConsole();
-/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/ms681952.aspx
-bool AttachConsole(uint dwProcessId);
-/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/ms683231.aspx
-int  GetStdHandle(int nStdHandle);
-/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/ms687401.aspx
-bool WriteConsoleW(
-    int hConsoleOutput, string lpBuffer, uint nNumberOfCharsToWrite,
-    uint& lpNumberOfCharsWritten, int lpReserved
-);
-/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/ms684958.aspx
-bool ReadConsoleW(
-    int hConsoleInput, string& lpBuffer, uint nNumberOfCharsToRead,
-    uint& lpNumberOfCharsRead, int pInputControl
-);
-/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/aa363362.aspx
-void OutputDebugStringW(string msg);
+#import "winmm.dll"
+/// @see https://msdn.microsoft.com/en-us/library/windows/desktop/dd743680.aspx
+bool PlaySoundW(string lpSound, int hMod, int fSound);
 #import
 
 //-----------------------------------------------------------------------------
