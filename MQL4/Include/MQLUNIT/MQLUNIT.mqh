@@ -162,28 +162,28 @@
 
 //-----------------------------------------------------------------------------
 /// @brief Starts the MQLUNIT test block definition.
-#define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {    \
+#define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {     \
 
 //-----------------------------------------------------------------------------
 
 /// @brief Enables running inherited tests from the superclass.
-#define MQLUNIT_INHERIT(super) super::run(__result__);                      \
+#define MQLUNIT_INHERIT(super) super::run(__result__);                       \
 
 //-----------------------------------------------------------------------------
 
 /// @brief Defines a beginning of test with a @a name.
-#define TEST_START(name) {                                                  \
-    string __testName__ = StringConcatenate("test", #name);                 \
-    bool __failed__ = false;                                                \
-    setUp();                                                                \
+#define TEST_START(name) {                                                   \
+    string __testName__ = StringConcatenate("test", #name);                  \
+    bool __failed__ = false;                                                 \
+    setUp();                                                                 \
     __result__.startTest(__testName__);
 
 //-----------------------------------------------------------------------------
 
 /// @brief Defines an end of a test.
-#define TEST_END ;                                                          \
-    __result__.endTest(__testName__);                                       \
-    tearDown();                                                             \
+#define TEST_END ;                                                           \
+    __result__.endTest(__testName__);                                        \
+    tearDown();                                                              \
 }
 
 //-----------------------------------------------------------------------------
