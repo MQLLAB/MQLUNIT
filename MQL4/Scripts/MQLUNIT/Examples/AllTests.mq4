@@ -34,6 +34,10 @@
 #include "SimpleTest.mqh"
 #include "ListTest.mqh"
 #include "Money/MoneyTest.mqh"
+#include "Chess/BoardGame.mqh"
+#include "Chess/BoardGameTest.mqh"
+#include "Chess/Chess.mqh"
+#include "Chess/ChessTest.mqh"
 
 //-----------------------------------------------------------------------------
 
@@ -42,6 +46,10 @@ void OnStart() {
     suite.addTest(new MQLUNIT_Examples_ListTest());
     suite.addTest(new MQLUNIT_Examples_SimpleTest());
     suite.addTest(new MQLUNIT_Examples_Money_MoneyTest());
+    suite.addTest(new MQLUNIT_Examples_Chess_BoardGameTest
+        <MQLUNIT_Examples_Chess_BoardGame>());
+    suite.addTest(new MQLUNIT_Examples_Chess_ChessTest
+        <MQLUNIT_Examples_Chess_Chess>());
 
     MQLUNIT_TerminalTestRunner runner;
     runner.run(&suite);

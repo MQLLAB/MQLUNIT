@@ -1,6 +1,6 @@
-/// @file   BoardGame.mq4
+/// @file   Chess.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT examples : BoardGame class definition.
+/// @brief  MQLUNIT examples : Chess class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -26,17 +26,16 @@
 
 #property strict
 
-#ifndef SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
-#define SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_CHESS_CHESS_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_CHESS_CHESS_MQH
+
+#include "BoardGame.mqh"
 
 //-----------------------------------------------------------------------------
 
-/// @brief Example class to show hierarchy testing.
-class MQLUNIT_Examples_Chess_BoardGame {
+class MQLUNIT_Examples_Chess_Chess: public MQLUNIT_Examples_Chess_BoardGame {
 public:
-    /// @brief Expected to return true
-    virtual bool reset() { return true; };
-    virtual ~MQLUNIT_Examples_Chess_BoardGame() {};
+    virtual int getNumberOfPieces() const { return  32; };
 };
 
 //-----------------------------------------------------------------------------

@@ -1,6 +1,6 @@
-/// @file   BoardGame.mq4
+/// @file   ChessTest.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT examples : BoardGame class definition.
+/// @brief  MQLUNIT examples : ChessTest class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -26,17 +26,34 @@
 
 #property strict
 
-#ifndef SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
-#define SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_CHESS_CHESSTEST_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_CHESS_CHESSTEST_MQH
+
+#include <MQLUNIT/MQLUNIT.mqh>
+#include <MQLLIB/Lang/Pointer.mqh>
 
 //-----------------------------------------------------------------------------
 
-/// @brief Example class to show hierarchy testing.
-class MQLUNIT_Examples_Chess_BoardGame {
+template <typename T>
+class MQLUNIT_Examples_Chess_ChessTest
+    : public MQLUNIT_Examples_Chess_BoardGameTest<T> {
 public:
-    /// @brief Expected to return true
-    virtual bool reset() { return true; };
-    virtual ~MQLUNIT_Examples_Chess_BoardGame() {};
+    MQLUNIT_Examples_Chess_ChessTest()
+        : MQLUNIT_Examples_Chess_BoardGameTest<T>(typename(this))  {};
+    MQLUNIT_Examples_Chess_ChessTest(string name)
+        : MQLUNIT_Examples_Chess_BoardGameTest<T>(name) {};
+
+    MQLUNIT_START
+    MQLUNIT_INHERIT(MQLUNIT_Examples_Chess_BoardGameTest<T>)
+
+    //----------------------------------------
+
+    TEST_START(NumberOfPieces){
+        ASSERT_TRUE(NULL, _game.getNumberOfPieces() == 32);
+    }
+    TEST_END
+
+    MQLUNIT_END
 };
 
 //-----------------------------------------------------------------------------

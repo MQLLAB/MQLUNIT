@@ -1,6 +1,6 @@
-/// @file   BoardGame.mq4
+/// @file   BoardGameTest.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT examples : BoardGame class definition.
+/// @brief  MQLUNIT examples : BoardGameTest class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -26,17 +26,53 @@
 
 #property strict
 
-#ifndef SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
-#define SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAMETEST_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAMETEST_MQH
+
+#include <MQLUNIT/MQLUNIT.mqh>
+#include <MQLLIB/Lang/Pointer.mqh>
 
 //-----------------------------------------------------------------------------
 
-/// @brief Example class to show hierarchy testing.
-class MQLUNIT_Examples_Chess_BoardGame {
+template <typename T>
+class MQLUNIT_Examples_Chess_BoardGameTest  : public MQLUNIT_TestCase {
+protected:
+    T* _game;
 public:
-    /// @brief Expected to return true
-    virtual bool reset() { return true; };
-    virtual ~MQLUNIT_Examples_Chess_BoardGame() {};
+    MQLUNIT_Examples_Chess_BoardGameTest()
+        : MQLUNIT_TestCase(typename(this))  {};
+    MQLUNIT_Examples_Chess_BoardGameTest(string name)
+        : MQLUNIT_TestCase(name) {};
+
+    void setUp() {
+        _game = new T;
+    }
+
+    void tearDown() {
+        MQLLIB_Lang_SafeDelete(_game);
+    }
+
+    MQLUNIT_START
+
+    //----------------------------------------
+
+    TEST_START(Reset) {
+        ASSERT_TRUE(NULL, _game.reset());
+    }
+    TEST_END
+
+    //----------------------------------------
+
+    TEST_START(ResetShouldFail) {
+        ASSERT_TRUE(
+            "This test fails, this is intended", !_game.reset()
+        );
+    }
+    TEST_END
+
+    //----------------------------------------
+
+    MQLUNIT_END
 };
 
 //-----------------------------------------------------------------------------
