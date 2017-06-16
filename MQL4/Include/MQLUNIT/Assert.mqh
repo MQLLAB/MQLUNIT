@@ -60,11 +60,7 @@ public:
     /// @param message  : assertion description
     /// @param expected : expected value
     /// @param actual   : actual value
-<<<<<<< HEAD
     /// @return NULL on success or the failure description   
-=======
-    /// @return NULL on success or the failure description
->>>>>>> f1df1eedb53836041f0c9d2e9c58d928c4fba980
     // We must define one of the assertEqual overloads in class
     // definition and one separately to avoid the compiler complaints
     // about not being able to overload a template function (which it does

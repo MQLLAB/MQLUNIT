@@ -1,6 +1,6 @@
-/// @file   MoneyBag.mq4
+/// @file   BoardGame.mq4
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT examples : MoneyBag class definition.
+/// @brief  MQLUNIT examples : BoardGame class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -26,32 +26,19 @@
 
 #property strict
 
-#ifndef SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEY_MQH
-#define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEY_MQH
+#ifndef SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
+#define SCRIPTS_MQLUNIT_EXAMPLES_CHESS_BOARDGAME_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
 
-#include "IMoney.mqh"
-#include "Money.mqh"
+//-----------------------------------------------------------------------------
 
-/// @brief A MoneyBag defers exchange rate conversions.
-///
-/// For example adding 12 Swiss Francs to 14 US Dollars is represented as a
-/// bag containing the two Monies 12 CHF and 14 USD. Adding another 10 Swiss
-/// francs gives a bag with 22 CHF and 14 USD. Due to the deferred exchange
-/// rate conversion we can later value a MoneyBag with different exchange
-/// rates.
-///
-/// A MoneyBag is represented as a list of Monies and provides different
-/// constructors to create a MoneyBag.
-class MQLUNIT_Examples_Money_MoneyBag : public MQLUNIT_Examples_Money_IMoney  {
+/// @brief Example class to show hierarchy testing.
+class MQLUNIT_Examples_Chess_BoardGame {
 public:
-    MQLUNIT_Examples_Money_MoneyBag() {};
-    MQLUNIT_Examples_Money_MoneyBag(const MQLUNIT_Examples_Money_Money& that);
-    virtual ~MQLUNIT_Examples_Money_MoneyBag() {};
-
-    void operator =(const MQLUNIT_Examples_Money_MoneyBag& that);
-    bool operator ==(const MQLUNIT_Examples_Money_MoneyBag& that);
+    /// @brief Expected to return true
+    virtual bool reset() { return true; };
+    virtual ~BoardGame();
 };
 
 //-----------------------------------------------------------------------------

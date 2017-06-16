@@ -46,4 +46,5 @@ void OnStart() {
     MQLUNIT_TerminalTestRunner runner;
     runner.run(&suite);
 }
+
 //-----------------------------------------------------------------------------

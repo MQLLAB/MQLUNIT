@@ -30,6 +30,7 @@
 #define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEYTEST_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
+#include <MQLLIB/Lang/Exception.mqh>
 
 #include "Money.mqh"
 
@@ -41,13 +42,68 @@ public:
     MQLUNIT_Examples_Money_MoneyTest() : MQLUNIT_TestCase(typename(this))  {};
     MQLUNIT_Examples_Money_MoneyTest(string name) : MQLUNIT_TestCase(name) {};
 
-    void setUp() {
-    }
-
     MQLUNIT_START
+    
+        //----------------------------------------
+    
+    TEST_START(Constructor) {
+        const string currencyFF =  "FF";
+        const double longNumber = 1234.5678;
+
+        MQLUNIT_Examples_Money_Money money(longNumber, currencyFF);
+
+        ASSERT_EQUALS(NULL, longNumber, money.getAmount());
+        ASSERT_EQUALS(NULL, currencyFF, money.getCurrency());
+    }
+    TEST_END
 
     //----------------------------------------
 
+    TEST_START(Add) {
+        MQLUNIT_Examples_Money_Money money12FF(12, "FF");
+        MQLUNIT_Examples_Money_Money expectedMoney(135, "FF");
+
+        MQLUNIT_Examples_Money_Money money(123, "FF");
+        money += money12FF;
+        
+        ASSERT_EQUALS("Add should work", expectedMoney, money);
+    }
+    TEST_END
+    
+    //----------------------------------------
+
+    TEST_START(Equal) {
+        MQLUNIT_Examples_Money_Money money123FF(123, "FF");
+        MQLUNIT_Examples_Money_Money money123USD(123, "USD");
+        MQLUNIT_Examples_Money_Money money12FF(12, "FF");
+        MQLUNIT_Examples_Money_Money money12USD(12, "USD");
+
+        ASSERT_TRUE("==", money123FF == money123FF);
+        ASSERT_TRUE("!= amount", money12FF != money123FF);
+        ASSERT_TRUE("!= currency", money123USD != money123FF);
+        ASSERT_TRUE("!= currency and != amount", money12USD != money123FF);
+    }
+    TEST_END
+    
+    //----------------------------------------
+
+    TEST_START(Throw) {
+        MQLUNIT_Examples_Money_Money money123FF(123, "FF");
+        MQLUNIT_Examples_Money_Money money( 123, "USD" );
+        
+        bool exceptionThrown = false;
+        
+        MQLLIB_TRY {
+            money += money123FF;
+        } MQLLIB_CATCH(MQLUNIT_INCOMPATIBLE_MONIES) {
+            exceptionThrown = true;
+        }
+
+        ASSERT_TRUE("Must not change money", money.getAmount() == 123);
+        ASSERT_TRUE("Must throw an exception", exceptionThrown);
+    }
+    TEST_END
+        
     //----------------------------------------
 
     MQLUNIT_END

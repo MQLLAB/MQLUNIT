@@ -1,6 +1,6 @@
-/// @file   IMoney.mq4
+/// @file   Exception.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT examples : IMoney interface definition.
+/// @brief  Exception emulation.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -26,16 +26,41 @@
 
 #property strict
 
-#ifndef SCRIPTS_MQLUNIT_EXAMPLES_MONEY_IMONEY_MQH
-#define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_IMONEY_MQH
-
-#include <MQLUNIT/MQLUNIT.mqh>
+#ifndef MQLLIB_LANG_EXCEPTION_MQH
+#define MQLLIB_LANG_EXCEPTION_MQH
 
 //-----------------------------------------------------------------------------
 
-/// @brief The common interface for simple Monies and MoneyBags.
-class MQLUNIT_Examples_Money_IMoney {
-};
+/// @brief Exception handling emulation.
+///
+/// To throw an "exception":
+///
+/// 1. #define some "exceptions" as numbers
+/// 2. call MQLLIB_THROW() and pass an "exception" number
+/// 3. abort the rest of your function execution
+///
+/// To catch an "exception" use the following code:
+///
+/// @code
+/// #define MY_EXCEPTION 1
+///
+/// MQLLIB_TRY {
+///     thisWillThrowAnException();
+/// MQLLIB_CATCH(MY_EXCEPTION) {
+///     Print("Exception handled");
+/// }
+///
+/// void thisWillThrowAnException() {
+///    ...
+///     if (badStuffHappened) {
+///         MQLLIB_THROW(MY_EXCEPTION);
+///     }
+///     ...
+/// }
+/// @endcode
+#define MQLLIB_TRY
+#define MQLLIB_CATCH(e) if (_LastError - ERR_USER_ERROR_FIRST == e)
+#define MQLLIB_THROW(e) SetUserError(e)
 
 //-----------------------------------------------------------------------------
 

@@ -30,52 +30,46 @@
 #define SCRIPTS_MQLUNIT_EXAMPLES_MONEY_MONEY_MQH
 
 #include <MQLUNIT/MQLUNIT.mqh>
+#include <MQLLIB/Lang/Exception.mqh>
 
-#include "IMoney.mqh"
-
-class MQLUNIT_Examples_Money_MoneyBag;
+#define MQLUNIT_INCOMPATIBLE_MONIES 1331
 
 //-----------------------------------------------------------------------------
 
 /// @brief A simple Money.
-class MQLUNIT_Examples_Money_Money : public MQLUNIT_Examples_Money_IMoney {
+class MQLUNIT_Examples_Money_Money {
 private:
-    int    _amount;
+    double _amount;
     string _currency;
 
 public:
-    MQLUNIT_Examples_Money_Money(int amount, string currency)
+    MQLUNIT_Examples_Money_Money(const double amount, const string currency)
         : _amount(amount), _currency(currency) {};
 
-    MQLUNIT_Examples_Money_Money(const MQLUNIT_Examples_Money_Money& that);
+    MQLUNIT_Examples_Money_Money(const MQLUNIT_Examples_Money_Money& that)
+        : _amount(that._amount), _currency(that._currency) {};
 
-    virtual ~MQLUNIT_Examples_Money_Money() {};
+    ~MQLUNIT_Examples_Money_Money() {};
 
-    void operator =(const MQLUNIT_Examples_Money_Money& that);
-    bool operator ==(const MQLUNIT_Examples_Money_Money& that);
-
-    MQLUNIT_Examples_Money_Money addMoney(
-        const MQLUNIT_Examples_Money_Money& money
-    ) const;
-
-    MQLUNIT_Examples_Money_Money addMoneyBag(
-        const MQLUNIT_Examples_Money_MoneyBag& moneyBag
-    )  const;
-
-    int amount() const { return _amount; };
-    string currency() const { return _currency; };
-    bool isZero() const;
-
-    MQLUNIT_Examples_Money_Money multiply(const int factor) const;
-    MQLUNIT_Examples_Money_Money negate() const;
-
-    MQLUNIT_Examples_Money_Money subtract(
-        const MQLUNIT_Examples_Money_Money& money
-    ) const;
-
-    string toString() const {
-        return StringFormat("[%i %s]", _amount, _currency);
+    bool operator ==(const MQLUNIT_Examples_Money_Money& that) const {
+        return _amount == that._amount && _currency == that._currency;
     };
+    
+    bool operator !=(const MQLUNIT_Examples_Money_Money& that) const {
+        return !(this == that); // !(*this == other);
+    };
+    
+    void operator +=(const MQLUNIT_Examples_Money_Money& that) {
+        if (_currency != that._currency) {
+            MQLLIB_THROW(MQLUNIT_INCOMPATIBLE_MONIES);
+        } else {
+            _amount += that._amount;
+        }
+    };
+
+    double getAmount()   const { return _amount;   };
+    
+    string getCurrency() const { return _currency; };
 };
 
 //-----------------------------------------------------------------------------

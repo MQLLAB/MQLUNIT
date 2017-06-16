@@ -79,11 +79,7 @@ public:
     /// @param test : a test to run
     /// @see MQLUNIT_Test
     void run(MQLUNIT_Test* test);
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> f1df1eedb53836041f0c9d2e9c58d928c4fba980
     // }
 
 private:
