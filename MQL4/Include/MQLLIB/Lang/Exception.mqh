@@ -31,6 +31,11 @@
 
 //-----------------------------------------------------------------------------
 
+#define MQLLIB_RUNTIME_EXCEPTION            1
+#define MQLLIB_INVALID_ARGUMENT_EXCEPTION   2
+
+//-----------------------------------------------------------------------------
+
 /// @brief Exception handling emulation.
 ///
 /// To throw an "exception":
@@ -58,6 +63,7 @@
 ///     ...
 /// }
 /// @endcode
+
 #define MQLLIB_TRY
 #define MQLLIB_CATCH(e) if (_LastError - ERR_USER_ERROR_FIRST == e)
 #define MQLLIB_THROW(e) SetUserError(e)

@@ -1,6 +1,6 @@
-/// @file   AllTests.mq4
+/// @file   Element.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT test suite executor script.
+/// @brief  MQLLIB XML Element class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -24,41 +24,49 @@
 // DEALINGS IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#property copyright "Copyright 2017, Eneset Group Trust"
-#property link      "https://www.github.com/MQLLIB/MQLUNIT"
-#property version   "1.0"
 #property strict
 
-#include <MQLUNIT/MQLUNIT.mqh>
+#ifndef MQLLIB_COLLECTION_PAIR_MQH
+#define MQLLIB_COLLECTION_PAIR_MQH
 
-#include "SimpleTest.mqh"
-#include "ListTest.mqh"
-#include "Money/MoneyTest.mqh"
-#include "Chess/BoardGame.mqh"
-#include "Chess/BoardGameTest.mqh"
-#include "Chess/Chess.mqh"
-#include "Chess/ChessTest.mqh"
-
-#include <MQLLIB/XML/Element.mqh>
-#include <MQLLIB/XML/Document.mqh>
+#include <MQLLIB/Lang/Pointer.mqh>
 
 //-----------------------------------------------------------------------------
 
-void OnStart() {
+template <typename K, typename V>
+class MQLLIB_Collection_Pair {
+private:
+    K _key;
+    V _value;
 
-MQLLIB_XML_Document x("a", "b");
+public:
+    MQLLIB_Collection_Pair(K key, V value)
+        : _key(key), _value(value) {};
 
-    MQLUNIT_TestSuite suite;
-    suite.addTest(new MQLUNIT_Examples_ListTest());
-    suite.addTest(new MQLUNIT_Examples_SimpleTest());
-    suite.addTest(new MQLUNIT_Examples_Money_MoneyTest());
-    suite.addTest(new MQLUNIT_Examples_Chess_BoardGameTest
-        <MQLUNIT_Examples_Chess_BoardGame>());
-    suite.addTest(new MQLUNIT_Examples_Chess_ChessTest
-        <MQLUNIT_Examples_Chess_Chess>());
+    MQLLIB_Collection_Pair(const MQLLIB_Collection_Pair& that)
+        : _key(that._key), _value(that._value) {};
 
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
-}
+    ~MQLLIB_Collection_Pair() {
+        MQLLIB_Lang_SafeDelete(_key);
+        MQLLIB_Lang_SafeDelete(_value);
+    }
+
+    void operator =(const MQLLIB_Collection_Pair& that) {
+        this._key = that._key; this._value = that._value;
+    };
+
+    K getKey()   const { return _key;   };
+    V getValue() const { return _value; };
+
+    bool operator ==(const MQLLIB_Collection_Pair& that) {
+        return this._key == that._key && this._value == that._value;
+    };
+
+    bool operator !=(const MQLLIB_Collection_Pair& that) {
+        return !(this == that);
+    };
+};
 
 //-----------------------------------------------------------------------------
+
+#endif

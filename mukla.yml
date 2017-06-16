@@ -28,5 +28,6 @@ require:
   MQLLAB/MQLLIB-Lang: master
   MQLLAB/MQLLIB-Utils: master
   MQLLAB/MQLLIB-Collection: master
+  MQLLAB/MQLLIB-XML: master
 require-dev:
   MQLLAB/MQLLIB-Win32: master
