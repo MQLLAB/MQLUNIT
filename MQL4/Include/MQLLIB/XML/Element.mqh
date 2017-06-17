@@ -200,7 +200,7 @@ string MQLLIB_XML_Element::toString(const string indent) const {
 
     if (!_elements.isEmpty()) {
         element = StringConcatenate(element, "\n");
-        string subNodeIndent = StringConcatenate(indent, " ");
+        string subNodeIndent = StringConcatenate(indent, "  ");
 
         MQLLIB_FOREACHV(MQLLIB_XML_Element*, node, _elements) {
             element = StringConcatenate(element, node.toString(subNodeIndent));
@@ -216,7 +216,7 @@ string MQLLIB_XML_Element::toString(const string indent) const {
         }
     }
 
-    element = StringConcatenate(element, "</", _name, ">");
+    element = StringConcatenate(element, "</", _name, ">\n");
 
     return element;
 }

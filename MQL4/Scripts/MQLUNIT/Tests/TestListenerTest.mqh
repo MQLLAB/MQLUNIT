@@ -71,6 +71,8 @@ public:
     TEST_START(StartStop) {
         __Success__ test;
         test.run(_result);
+        ASSERT_TRUE(NULL, _listener.suiteStarted);
+        ASSERT_TRUE(NULL, _listener.suiteEnded);
         ASSERT_EQUALS(NULL, (uint) 1, _listener.startCount);
         ASSERT_EQUALS(NULL, (uint) 1, _listener.endCount);
     }
@@ -82,6 +84,8 @@ public:
         __Success__ test;
         test.run(_result);
         test.run(_result);
+        ASSERT_TRUE(NULL, _listener.suiteStarted);
+        ASSERT_TRUE(NULL, _listener.suiteEnded);
         ASSERT_EQUALS(NULL, (uint) 2, _listener.startCount);
         ASSERT_EQUALS(NULL, (uint) 2, _listener.endCount);
     }

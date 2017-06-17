@@ -40,6 +40,7 @@
 #include "TestResult.mqh"
 #include "TestRunner.mqh"
 #include "TestSuite.mqh"
+#include "XMLTestRunner.mqh"
 
 //-----------------------------------------------------------------------------
 
@@ -162,12 +163,15 @@
 
 //-----------------------------------------------------------------------------
 /// @brief Starts the MQLUNIT test block definition.
-#define MQLUNIT_START virtual void run(MQLUNIT_TestResult* __result__) {     \
+#define MQLUNIT_START virtual void run(                                      \
+    MQLUNIT_TestResult* __result__, bool __inherit__ = false                 \
+) {                                                                          \
+    if (!__inherit__) { __result__.startSuite(&this); }
 
 //-----------------------------------------------------------------------------
 
 /// @brief Enables running inherited tests from the superclass.
-#define MQLUNIT_INHERIT(super) super::run(__result__);                       \
+#define MQLUNIT_INHERIT(super) super::run(__result__, true);
 
 //-----------------------------------------------------------------------------
 
@@ -176,20 +180,21 @@
     string __testName__ = StringConcatenate("test", #name);                  \
     bool __failed__ = false;                                                 \
     setUp();                                                                 \
-    __result__.startTest(__testName__);
+    __result__.startTest(&this, __testName__);
 
 //-----------------------------------------------------------------------------
 
 /// @brief Defines an end of a test.
 #define TEST_END ;                                                           \
-    __result__.endTest(__testName__);                                        \
+    __result__.endTest(&this, __testName__);                                 \
     tearDown();                                                              \
 }
 
 //-----------------------------------------------------------------------------
 
 /// @brief Ends the MQLUNIT test block definition.
-#define MQLUNIT_END };
+#define MQLUNIT_END if (!__inherit__) { __result__.endSuite(&this); }       \
+};
 
 //-----------------------------------------------------------------------------
 

@@ -40,12 +40,12 @@ class MQLUNIT_TestRunner : public MQLUNIT_TestListener {
 public:
     /// @brief Destructor
     virtual ~MQLUNIT_TestRunner() {};
-    
+
     /// @brief Run a test and output the result.
     /// @param test : a test to run
     /// @see MQLUNIT_Test
     virtual void run(MQLUNIT_Test* test) = 0;
-    
+
 protected:
     string failureCountFormat(uint count) const;
 };

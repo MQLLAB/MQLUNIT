@@ -39,15 +39,9 @@
 #include "Chess/Chess.mqh"
 #include "Chess/ChessTest.mqh"
 
-#include <MQLLIB/XML/Element.mqh>
-#include <MQLLIB/XML/Document.mqh>
-
 //-----------------------------------------------------------------------------
 
 void OnStart() {
-
-MQLLIB_XML_Document x("a", "b");
-
     MQLUNIT_TestSuite suite;
     suite.addTest(new MQLUNIT_Examples_ListTest());
     suite.addTest(new MQLUNIT_Examples_SimpleTest());
@@ -57,7 +51,7 @@ MQLLIB_XML_Document x("a", "b");
     suite.addTest(new MQLUNIT_Examples_Chess_ChessTest
         <MQLUNIT_Examples_Chess_Chess>());
 
-    MQLUNIT_TerminalTestRunner runner;
+    MQLUNIT_XMLTestRunner runner("MQLUNIT/Examples/AllTest.xml");
     runner.run(&suite);
 }
 

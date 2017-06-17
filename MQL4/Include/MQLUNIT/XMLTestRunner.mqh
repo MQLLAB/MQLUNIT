@@ -1,6 +1,6 @@
-/// @file   TerminalTestRunner.mqh
+/// @file   XMLTestRunner.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT TerminalTestRunner class definition.
+/// @brief  MQLUNIT XMLTestRunner class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
@@ -26,10 +26,14 @@
 
 #property strict
 
-#ifndef MQLUNIT_TERMINALTESTRUNNER_MQH
-#define MQLUNIT_TERMINALTESTRUNNER_MQH
+#ifndef MQLUNIT_XMLTESTRUNNER_MQH
+#define MQLUNIT_XMLTESTRUNNER_MQH
 
 #include <MQLLIB/Collections/Vector.mqh>
+#include <MQLLIB/XML/Element.mqh>
+#include <MQLLIB/XML/Document.mqh>
+
+#include <Files/FileTxt.mqh>
 
 #include "Constants.mqh"
 #include "TestFailure.mqh"
@@ -38,24 +42,27 @@
 
 //-----------------------------------------------------------------------------
 
-/// @brief Test runner that outputs results to the "Experts" log window of
-/// MetaTrader terminal.
-///
-/// Optionally can pop up an alert dialog with a list of test failures if any
-/// occure.
+/// @brief Test runner that outputs results to the XML file compatible with
+/// JUnit report analysers.
 /// @see MQLUNIT_TestRunner
-class MQLUNIT_TerminalTestRunner : public MQLUNIT_TestRunner {
+class MQLUNIT_XMLTestRunner : public MQLUNIT_TestRunner {
 private:
     MQLLIB_Collections_Vector<MQLUNIT_TestFailure*> _failures;
-    string _output;
-    bool _alertsEnabled;
+    MQLLIB_XML_Document _xml;
+    MQLLIB_XML_Element* _currentSuite;
+    MQLLIB_XML_Element* _currentTest;
+    string _file;
 
 public:
-    /// @brief Constructor : disable alerts by default.
-    MQLUNIT_TerminalTestRunner() : _output(""), _alertsEnabled(false) {};
+    /// @brief Constructor : create a new XML test runner.
+    /// @param file : full path the file to write test results to (relative
+    /// to MQL4/Files directory)
+    MQLUNIT_XMLTestRunner(string file) : _file(file), _currentSuite(NULL) {
+        _xml.setRootElement(new MQLLIB_XML_Element("testsuites"));
+    };
 
     /// @brief Destructor
-    ~MQLUNIT_TerminalTestRunner() {};
+    ~MQLUNIT_XMLTestRunner() {};
 
     // MQLUNIT_TestListener implementation {
 
@@ -66,11 +73,11 @@ public:
 
     /// @brief Test suite started event.
     /// @param test : test case reference
-    void startSuite(MQLUNIT_Test* test) {};
+    void startSuite(MQLUNIT_Test* test);
 
     /// @brief Test suite ended event.
     /// @param test : test case reference
-    void endSuite(MQLUNIT_Test* test) {};
+    void endSuite(MQLUNIT_Test* test);
 
     /// @brief Test started event.
     /// @param test : test case reference
@@ -80,7 +87,7 @@ public:
     /// @brief Test ended event.
     /// @param test : test case reference
     /// @param name : name of a test
-    void endTest(MQLUNIT_Test* test, const string name) {};
+    void endTest(MQLUNIT_Test* test, const string name);
 
     // }
 
@@ -92,103 +99,72 @@ public:
     void run(MQLUNIT_Test* test);
 
     // }
-
-    /// @brief Enable or disable alerts window pop up in case of a test
-    /// failure.
-    /// @param alertsEnabled : set to true to enable alerts, set to false to
-    /// disable alerts
-    void setAlertsEnabled(bool alertsEnabled) {
-        _alertsEnabled = alertsEnabled;
-    };
-
-private:
-    void printFailureCount(uint count) const;
-    void printFailure(uint count, MQLUNIT_TestFailure* failure) const;
-    void checkWrap();
 };
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TerminalTestRunner::printFailureCount(uint count) const {
-    PrintFormat(failureCountFormat(count), count);
+void MQLUNIT_XMLTestRunner::startSuite(MQLUNIT_Test* test) {
+    _currentSuite = new MQLLIB_XML_Element("testsuite");
+    _currentSuite.addAttribute("name", test.getName());
 }
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TerminalTestRunner::startTest(
-    MQLUNIT_Test* test, const string name
-) {
-    checkWrap();
-    StringAdd(_output, ".");
+void MQLUNIT_XMLTestRunner::endSuite(MQLUNIT_Test* test) {
+    _currentSuite.addAttribute("tests", _currentSuite.elementCount());
+    _xml.rootElement().addElement(_currentSuite);
 }
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TerminalTestRunner::addFailure(MQLUNIT_TestFailure* failure) {
+void MQLUNIT_XMLTestRunner::startTest(MQLUNIT_Test* test, const string name) {
+    _currentTest = new MQLLIB_XML_Element("testcase");
+    _currentTest.addAttribute("name", name);
+}
+
+//-----------------------------------------------------------------------------
+
+void MQLUNIT_XMLTestRunner::endTest(MQLUNIT_Test* test, const string name) {
+    _currentSuite.addElement(_currentTest);
+}
+
+//-----------------------------------------------------------------------------
+
+void MQLUNIT_XMLTestRunner::addFailure(MQLUNIT_TestFailure* failure) {
     _failures.add(failure);
-    checkWrap();
-    StringAdd(_output, "F");
+    string message = StringFormat(
+        "%s(%s:%i): %s", failure.getMethod(), failure.getFile(),
+        failure.getLine(), failure.getMessage()
+    );
+    MQLLIB_XML_Element* failXml = new MQLLIB_XML_Element("failure", message);
+    failXml.addAttribute("message", failure.getMessage());
+    _currentTest.addElement(failXml);
 }
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TerminalTestRunner::checkWrap() {
-    if (StringLen(_output) == MQLUNIT_OUTPUT_WRAP) {
-        Print(_output);
-        _output = "";
-    }
-}
-
-//-----------------------------------------------------------------------------
-
-void MQLUNIT_TerminalTestRunner::printFailure(
-    uint count, MQLUNIT_TestFailure* failure
-) const {
-    if (_alertsEnabled) {
-        Alert(
-            StringFormat(
-                "%s(%s:%i): %s", failure.getMethod(), failure.getFile(),
-                failure.getLine(), failure.getMessage()
-            )
-        );
-  } else {
-      PrintFormat(
-          "%i) %s(%s:%i): %s", count, failure.getMethod(),
-          failure.getFile(), failure.getLine(), failure.getMessage()
-      );
-  }
-}
-
-//-----------------------------------------------------------------------------
-
-void MQLUNIT_TerminalTestRunner::run(MQLUNIT_Test* test) {
+void MQLUNIT_XMLTestRunner::run(MQLUNIT_Test* test) {
     MQLUNIT_TestResult result;
     result.addListener(&this);
-    Print("");
 
     double startTime = GetTickCount();
     test.run(&result);
     double endTime = GetTickCount();
 
-    Print(_output);
-    PrintFormat("Time %.3f", (endTime - startTime) / 1000);
+    _xml.rootElement().addAttribute("name", test.getName());
 
-    if (_failures.size() > 0) {
-        printFailureCount(_failures.size());
-        uint count = 1;
-        MQLLIB_FOREACHV(MQLUNIT_TestFailure*, failure, _failures) {
-            printFailure(count, failure);
-            count++;
-        }
+    _xml.rootElement().addAttribute(
+        "time", StringFormat("%.6f", (endTime - startTime) / 1000)
+    );
 
-        Print("FAILURES!!!");
-        PrintFormat("Tests run: %i,  Failures: %i", result.runCount(),
-        _failures.size());
-        Print("");
-    } else {
-        PrintFormat("OK (%i tests)", result.runCount());
-        Print("");
-    }
+    _xml.rootElement().addAttribute("tests", result.runCount());
+
+    _xml.rootElement().addAttribute( "failures", _failures.size());
+
+    CFileTxt file;
+    file.Open(_file, FILE_WRITE | FILE_TXT);
+    file.WriteString(_xml.toString());
+    file.Close();
 }
 
 //-----------------------------------------------------------------------------

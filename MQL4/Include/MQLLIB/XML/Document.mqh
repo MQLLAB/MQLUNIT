@@ -109,7 +109,7 @@ string MQLLIB_XML_Document::toString() const {
     );
 
     if (_standalone) {
-        asString = StringConcatenate(asString, "standalone=\"yes\"");
+        asString = StringConcatenate(asString, " standalone=\"yes\"");
     }
 
     asString = StringConcatenate(asString, " ?>\n");

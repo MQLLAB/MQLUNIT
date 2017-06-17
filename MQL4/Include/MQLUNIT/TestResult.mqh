@@ -65,13 +65,23 @@ public:
     /// @see MQLUNIT_TestFailure
     void addFailure(MQLUNIT_TestFailure* failure);
 
+    /// @brief Test suite started event.
+    /// @param test : test case reference
+    void startSuite(MQLUNIT_Test* test);
+
+    /// @brief Test suite ended event.
+    /// @param test : test case reference
+    void endSuite(MQLUNIT_Test* test);
+
     /// @brief Informs the result that a test was started.
+    /// @param test : test case reference
     /// @param name : test name
-    void startTest(const string name);
+    void startTest(MQLUNIT_Test* test, const string name);
 
     /// @brief Informs the result that a test was completed.
+    /// @param test : test case reference
     /// @param name : test name
-    void endTest(const string name);
+    void endTest(MQLUNIT_Test* test, const string name);
 
     // }
 
@@ -86,18 +96,34 @@ public:
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TestResult::startTest(const string name) {
-    _runTests++;
+void MQLUNIT_TestResult::startSuite(MQLUNIT_Test* test) {
     MQLLIB_FOREACHV(MQLUNIT_TestListener*, listener, _listeners) {
-        listener.startTest(name);
+        listener.startSuite(test);
     }
 }
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TestResult::endTest(const string name) {
+void MQLUNIT_TestResult::endSuite(MQLUNIT_Test* test) {
     MQLLIB_FOREACHV(MQLUNIT_TestListener*, listener, _listeners) {
-        listener.endTest(name);
+        listener.endSuite(test);
+    }
+}
+
+//-----------------------------------------------------------------------------
+
+void MQLUNIT_TestResult::startTest(MQLUNIT_Test* test, const string name) {
+    _runTests++;
+    MQLLIB_FOREACHV(MQLUNIT_TestListener*, listener, _listeners) {
+        listener.startTest(test, name);
+    }
+}
+
+//-----------------------------------------------------------------------------
+
+void MQLUNIT_TestResult::endTest(MQLUNIT_Test* test, const string name) {
+    MQLLIB_FOREACHV(MQLUNIT_TestListener*, listener, _listeners) {
+        listener.endTest(test, name);
     }
 }
 

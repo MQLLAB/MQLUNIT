@@ -51,14 +51,24 @@ public:
     /// @param failure : failure details
     /// @see MQLUNIT_TestFailure
     virtual void addFailure(MQLUNIT_TestFailure* failure) = 0;
-    
+
+    /// @brief Test suite started event.
+    /// @param test : test case reference
+    virtual void startSuite(MQLUNIT_Test* test) = 0;
+
+    /// @brief Test suite ended event.
+    /// @param test : test case reference
+    virtual void endSuite(MQLUNIT_Test* test) = 0;
+
     /// @brief Test started event.
+    /// @param test : test case reference
     /// @param name : name of a test
-    virtual void startTest(const string name) = 0;
-    
+    virtual void startTest(MQLUNIT_Test* test, const string name) = 0;
+
     /// @brief Test ended event.
+    /// @param test : test case reference
     /// @param name : name of a test
-    virtual void endTest(const string name) = 0;
+    virtual void endTest(MQLUNIT_Test* test, const string name) = 0;
 };
 
 //-----------------------------------------------------------------------------

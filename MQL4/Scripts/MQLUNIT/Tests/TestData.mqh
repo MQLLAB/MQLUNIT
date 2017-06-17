@@ -160,7 +160,9 @@ public:
     __WasRun__() : MQLUNIT_TestCase(typename(this)),  _wasRun(false) {};
     __WasRun__(string name) : MQLUNIT_TestCase(name), _wasRun(false) {};
 
-    void run(MQLUNIT_TestResult* result) { _wasRun = true; };
+    void run(MQLUNIT_TestResult* result, bool inherited = true) {
+        _wasRun = true;
+    };
     bool wasRun() { return _wasRun; };
 };
 
@@ -223,12 +225,18 @@ public:
 	uint startCount;
 	uint endCount;
 	uint failureCount;
+    bool suiteStarted;
+    bool suiteEnded;
 
 public:
-    __TestListener__() : startCount(0), endCount(0), failureCount(0) {};
+    __TestListener__() :
+        startCount(0), endCount(0), failureCount(0),
+        suiteStarted(false), suiteEnded(false) {};
     void addFailure(MQLUNIT_TestFailure* failure) { failureCount++; };
-    void startTest(const string name) { startCount++; };
-    void endTest(const string name) { endCount++; };
+    void startTest(MQLUNIT_Test* test, const string name) { startCount++; };
+    void endTest(MQLUNIT_Test* test, const string name) { endCount++; };
+    void startSuite(MQLUNIT_Test* test) { suiteStarted = true; };
+    void endSuite(MQLUNIT_Test* test) { suiteEnded = true; };
 };
 
 //-----------------------------------------------------------------------------
@@ -240,7 +248,7 @@ public:
     __Test__() : MQLUNIT_Test(typename(this)),  _wasRun(false) {};
     __Test__(string name) : MQLUNIT_Test(name), _wasRun(false) {};
 
-    void run(MQLUNIT_TestResult* result) {
+    void run(MQLUNIT_TestResult* result, bool inherited = false) {
         _wasRun = true;
     }
 

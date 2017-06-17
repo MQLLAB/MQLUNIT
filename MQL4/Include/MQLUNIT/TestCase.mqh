@@ -99,8 +99,8 @@ public:
 
     /// @brief Runs the tests.
     /// @param result : collects the results of executing a test case
-    /// @see #MQLUNIT_TestResult
-    virtual void run(MQLUNIT_TestResult* result) = 0;
+    /// @see MQLUNIT_TestResult
+    virtual void run(MQLUNIT_TestResult* result, bool inherited = false) = 0;
 };
 
 //-----------------------------------------------------------------------------

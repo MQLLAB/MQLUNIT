@@ -63,13 +63,23 @@ public:
     /// @see MQLUNIT_TestFailure
     void addFailure(MQLUNIT_TestFailure* failure);
 
+    /// @brief Test suite started event.
+    /// @param test : test case reference
+    void startSuite(MQLUNIT_Test* test) {};
+
+    /// @brief Test suite ended event.
+    /// @param test : test case reference
+    void endSuite(MQLUNIT_Test* test) {};
+
     /// @brief Test started event.
+    /// @param test : test case reference
     /// @param name : name of a test
-    void startTest(const string name);
+    void startTest(MQLUNIT_Test* test, const string name);
 
     /// @brief Test ended event.
+    /// @param test : test case reference
     /// @param name : name of a test
-    void endTest(const string name) {};
+    void endTest(MQLUNIT_Test* test, const string name) {};
 
     // }
 
@@ -98,7 +108,9 @@ void MQLUNIT_ConsoleTestRunner::checkWrap() {
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_ConsoleTestRunner::startTest(const string name) {
+void MQLUNIT_ConsoleTestRunner::startTest(
+    MQLUNIT_Test* test, const string name
+) {
     checkWrap();
     MQLLIB_Utils_Console::write(".");
     _charCount++;

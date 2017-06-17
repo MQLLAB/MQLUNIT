@@ -40,7 +40,7 @@ class MQLUNIT_TestResult;
 class MQLUNIT_Test {
 private:
     const string _name;
-    
+
 public:
     /// @brief Constructor : creates a test using a class name as a test name.
     MQLUNIT_Test() : _name(typename(this)) {};
@@ -58,10 +58,12 @@ public:
 
     /// @brief Runs the test.
     /// @param result : collects the results of executing a test
+    /// @param inherited : set to true to tell the test it has been inherited
+    /// from and is run by a child test
     /// @see MQLUNIT_TestResult
-    virtual void run(MQLUNIT_TestResult* result) = 0;
+    virtual void run(MQLUNIT_TestResult* result, bool inherited = false) = 0;
 
-private:    
+private:
     // copying of the interface is forbidden
     MQLUNIT_Test(const MQLUNIT_Test& that) {};
     void operator =(const MQLUNIT_Test& that) {};
