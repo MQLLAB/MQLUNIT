@@ -51,7 +51,7 @@ void OnStart() {
     suite.addTest(new MQLUNIT_Examples_Chess_ChessTest
         <MQLUNIT_Examples_Chess_Chess>());
 
-    MQLUNIT_XMLTestRunner runner("MQLUNIT/Examples/AllTest.xml");
+    MQLUNIT_TerminalTestRunner runner();
     runner.run(&suite);
 }
 
