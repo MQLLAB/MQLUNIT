@@ -1,6 +1,6 @@
-/// @file   Element.mqh
+/// @file   Pair.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLLIB XML Element class definition.
+/// @brief  MQLLIB Pair class definition.
 
 //-----------------------------------------------------------------------------
 // Copyright 2017, Eneset Group Trust
