@@ -40,6 +40,7 @@
 #include "TestResult.mqh"
 #include "TestRunner.mqh"
 #include "TestSuite.mqh"
+#include "TextFileTestRunner.mqh"
 #include "XMLTestRunner.mqh"
 
 //-----------------------------------------------------------------------------
