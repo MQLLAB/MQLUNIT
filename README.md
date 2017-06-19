@@ -24,8 +24,6 @@ currently in the process of being open-sourced.
 Take a look into the
 [MQLUNIT Cookbook](https://mqllab.github.io/MQLUNIT/md_docs_cookbook.html).
 It gives a quick start into using this testing framework.
-[Modules](https://mqllab.github.io/MQLUNIT/modules.html) give you an organised
-view of MQLUNIT classes.
 [FAQ](https://mqllab.github.io/MQLUNIT/md_docs_faq.html) has answers to
 commonly asked questions.
 
