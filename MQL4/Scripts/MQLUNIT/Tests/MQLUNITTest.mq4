@@ -30,6 +30,7 @@
 #property strict
 
 #include <MQLUNIT/MQLUNIT.mqh>
+#include <Files/File.mqh>
 
 #include "AssertTest.mqh"
 #include "DoublePrecisionAssertTest.mqh"
@@ -45,6 +46,11 @@
 /// @brief MQLUNIT test suite executor entry point.
 /// Runs a complete MQLUNIT test suite using MQLUNIT (self-test).
 void OnStart() {
+    CFile file;
+
+    file.Delete("MQLUNIT/MQLUNITTest.xml");
+    file.Delete("MQLUNIT/SUCCESS");
+
     MQLUNIT_TestSuite suite;
     suite.addTest(new MQLUNIT_Tests_AssertTest());
     suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
@@ -60,8 +66,11 @@ void OnStart() {
         new MQLUNIT_Tests_TestRunnerTest<MQLUNIT_XMLTestRunner>()
     );
 
-    //MQLUNIT_XMLTestRunner runner("MQLUNIT/MQLUNITTest.xml");
-    MQLUNIT_TerminalTestRunner runner;
-    runner.run(&suite);
+    MQLUNIT_XMLTestRunner runner("MQLUNIT/MQLUNITTest.xml");
+
+    if (runner.run(&suite)) {
+        file.Open("MQLUNIT/SUCCESS", FILE_WRITE);
+        file.Close();
+    }
 }
 //-----------------------------------------------------------------------------

@@ -44,6 +44,7 @@ public:
     MQLUNIT_Tests_TestRunnerTest() : MQLUNIT_TestCase(typename(this)) {};
     MQLUNIT_Tests_TestRunnerTest(string name) : MQLUNIT_TestCase(name) {};
 
+
     void setUp() {
         _runner = new T("MQLUNIT/Tests/MQLUNIT_Tests_TestRunnerTest.out");
     };
@@ -51,6 +52,7 @@ public:
     void tearDown() {
         MQLLIB_Lang_SafeDelete(_runner);
         FileDelete("MQLUNIT/Tests/MQLUNIT_Tests_TestRunnerTest.out");
+        FolderDelete("MQLUNIT/Tests");
     };
 
     MQLUNIT_START
