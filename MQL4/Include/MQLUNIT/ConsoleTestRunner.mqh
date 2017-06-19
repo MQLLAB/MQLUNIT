@@ -87,8 +87,9 @@ public:
 
     /// @brief Run a test and output the result to the console.
     /// @param test : a test to run
+    /// @return true, if all tests succeeded, false if there were failures
     /// @see MQLUNIT_Test
-    void run(MQLUNIT_Test* test);
+    bool run(MQLUNIT_Test* test);
 
     // }
 
@@ -135,7 +136,7 @@ void MQLUNIT_ConsoleTestRunner::addFailure(MQLUNIT_TestFailure* failure) {
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_ConsoleTestRunner::run(MQLUNIT_Test* test) {
+bool MQLUNIT_ConsoleTestRunner::run(MQLUNIT_Test* test) {
     MQLUNIT_TestResult result;
     result.addListener(&this);
 
@@ -176,6 +177,8 @@ void MQLUNIT_ConsoleTestRunner::run(MQLUNIT_Test* test) {
     }
 
     MQLLIB_Utils_Console::writeLine();
+
+    return _failures.size() == 0;
 }
 
 //-----------------------------------------------------------------------------

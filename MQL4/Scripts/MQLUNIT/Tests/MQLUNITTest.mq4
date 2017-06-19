@@ -38,6 +38,7 @@
 #include "TestSuiteTest.mqh"
 #include "TestListenerTest.mqh"
 #include "TestImplementorTest.mqh"
+#include "TestRunnerTest.mqh"
 
 //-----------------------------------------------------------------------------
 
@@ -52,6 +53,12 @@ void OnStart() {
     suite.addTest(new MQLUNIT_Tests_TestSuiteTest());
     suite.addTest(new MQLUNIT_Tests_TestListenerTest());
     suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
+    suite.addTest(
+        new MQLUNIT_Tests_TestRunnerTest<MQLUNIT_TextFileTestRunner>()
+    );
+    suite.addTest(
+        new MQLUNIT_Tests_TestRunnerTest<MQLUNIT_XMLTestRunner>()
+    );
 
     //MQLUNIT_XMLTestRunner runner("MQLUNIT/MQLUNITTest.xml");
     MQLUNIT_TerminalTestRunner runner;

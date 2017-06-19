@@ -165,7 +165,9 @@ public:
     /// @param message : failure description
     /// @return Failure description (always not NULL)
     static string fail(string message) {
-        if (message == NULL) { return "Assertion failed"; }
+        if (message == NULL || StringLen(message) == 0) {
+            return "Assertion failed";
+        }
         return message;
     };
 
