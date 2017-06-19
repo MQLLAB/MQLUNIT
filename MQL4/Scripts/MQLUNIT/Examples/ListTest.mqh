@@ -68,7 +68,7 @@ public:
 		for (int i = 0; i < 100; i++) {
 			_full.Add(new __Integer__(i));
         }
-        ASSERT_EQUALS(NULL, (int) (100 + size), _full.Total());
+        ASSERT_EQUALS("", (int) (100 + size), _full.Total());
     }
     TEST_END
 
@@ -87,7 +87,7 @@ public:
     TEST_START(GetNodeAtIndex) {
         for (int i = 0; i < 3; i++) {
             ASSERT_EQUALS(
-                NULL, i + 1, ((__Integer__*) _full.GetNodeAtIndex(i)).get()
+                "", i + 1, ((__Integer__*) _full.GetNodeAtIndex(i)).get()
             );
         }
 

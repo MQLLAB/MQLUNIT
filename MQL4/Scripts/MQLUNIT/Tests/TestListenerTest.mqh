@@ -61,8 +61,8 @@ public:
     TEST_START(Failure) {
         __Failure__ test;
         test.run(_result);
-        ASSERT_EQUALS(NULL, (uint) 1, _listener.failureCount);
-        ASSERT_EQUALS(NULL, (uint) 1, _listener.endCount);
+        ASSERT_EQUALS("", (uint) 1, _listener.failureCount);
+        ASSERT_EQUALS("", (uint) 1, _listener.endCount);
     }
     TEST_END
 
@@ -71,10 +71,10 @@ public:
     TEST_START(StartStop) {
         __Success__ test;
         test.run(_result);
-        ASSERT_TRUE(NULL, _listener.suiteStarted);
-        ASSERT_TRUE(NULL, _listener.suiteEnded);
-        ASSERT_EQUALS(NULL, (uint) 1, _listener.startCount);
-        ASSERT_EQUALS(NULL, (uint) 1, _listener.endCount);
+        ASSERT_TRUE("", _listener.suiteStarted);
+        ASSERT_TRUE("", _listener.suiteEnded);
+        ASSERT_EQUALS("", (uint) 1, _listener.startCount);
+        ASSERT_EQUALS("", (uint) 1, _listener.endCount);
     }
     TEST_END
 
@@ -84,10 +84,10 @@ public:
         __Success__ test;
         test.run(_result);
         test.run(_result);
-        ASSERT_TRUE(NULL, _listener.suiteStarted);
-        ASSERT_TRUE(NULL, _listener.suiteEnded);
-        ASSERT_EQUALS(NULL, (uint) 2, _listener.startCount);
-        ASSERT_EQUALS(NULL, (uint) 2, _listener.endCount);
+        ASSERT_TRUE("", _listener.suiteStarted);
+        ASSERT_TRUE("", _listener.suiteEnded);
+        ASSERT_EQUALS("", (uint) 2, _listener.startCount);
+        ASSERT_EQUALS("", (uint) 2, _listener.endCount);
     }
     TEST_END
 

@@ -1,3 +1,0 @@
-# MQLUNIT Quick Start
-
-Goes here...

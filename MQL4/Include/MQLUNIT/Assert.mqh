@@ -60,7 +60,7 @@ public:
     /// @param message  : assertion description
     /// @param expected : expected value
     /// @param actual   : actual value
-    /// @return NULL on success or the failure description   
+    /// @return NULL on success or the failure description
     // We must define one of the assertEqual overloads in class
     // definition and one separately to avoid the compiler complaints
     // about not being able to overload a template function (which it does
@@ -159,13 +159,13 @@ public:
 
     /// @brief Fail the test providing a genertc failure description.
     /// @return Generic failure description ("Assertion failed")
-    static string fail() { return fail(NULL); };
+    static string fail() { return fail(""); };
 
     /// @brief Fail the test providing a specific failure description.
     /// @param message : failure description
     /// @return Failure description
     static string fail(string message) {
-        if (message == NULL) { return "Assertion failed"; }
+        if (message == "") { return "Assertion failed"; }
         return message;
     };
 

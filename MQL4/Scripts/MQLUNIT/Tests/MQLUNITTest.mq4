@@ -53,7 +53,8 @@ void OnStart() {
     suite.addTest(new MQLUNIT_Tests_TestListenerTest());
     suite.addTest(new MQLUNIT_Tests_TestImplementorTest());
 
-    MQLUNIT_XMLTestRunner runner("MQLUNIT/MQLUNITTest.xml");
+    //MQLUNIT_XMLTestRunner runner("MQLUNIT/MQLUNITTest.xml");
+    MQLUNIT_TerminalTestRunner runner;
     runner.run(&suite);
 }
 //-----------------------------------------------------------------------------

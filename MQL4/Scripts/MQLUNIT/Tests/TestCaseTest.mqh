@@ -48,8 +48,8 @@ public:
         __Failure__ test;
         MQLUNIT_TestResult result;
         test.run(&result);
-        ASSERT_EQUALS(NULL, (uint) 1, result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 1, result.failureCount());
+        ASSERT_EQUALS("", (uint) 1, result.runCount());
+        ASSERT_EQUALS("", (uint) 1, result.failureCount());
     }
     TEST_END
 
@@ -59,8 +59,8 @@ public:
         __Success__ test;
         MQLUNIT_TestResult result;
         test.run(&result);
-        ASSERT_EQUALS(NULL, (uint) 1, result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 0, result.failureCount());
+        ASSERT_EQUALS("", (uint) 1, result.runCount());
+        ASSERT_EQUALS("", (uint) 0, result.failureCount());
     }
     TEST_END
 
@@ -70,9 +70,9 @@ public:
         __SetUp__ test;
         MQLUNIT_TestResult result;
         test.run(&result);
-        ASSERT_EQUALS(NULL, (uint) 1, result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 1, result.failureCount());
-        ASSERT_TRUE(NULL, test.isSetUp());
+        ASSERT_EQUALS("", (uint) 1, result.runCount());
+        ASSERT_EQUALS("", (uint) 1, result.failureCount());
+        ASSERT_TRUE("", test.isSetUp());
     }
     TEST_END
 
@@ -82,9 +82,9 @@ public:
         __TornDown__ test;
         MQLUNIT_TestResult result;
         test.run(&result);
-        ASSERT_EQUALS(NULL, (uint) 1, result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 1, result.failureCount());
-        ASSERT_TRUE(NULL, test.isTornDown());
+        ASSERT_EQUALS("", (uint) 1, result.runCount());
+        ASSERT_EQUALS("", (uint) 1, result.failureCount());
+        ASSERT_TRUE("", test.isTornDown());
     }
     TEST_END
 
@@ -94,7 +94,7 @@ public:
         __WasRun__ test;
         MQLUNIT_TestResult result;
         test.run(&result);
-        ASSERT_TRUE(NULL, test.wasRun());
+        ASSERT_TRUE("", test.wasRun());
     }
     TEST_END
 

@@ -49,7 +49,7 @@ public:
     //----------------------------------------
 
     TEST_START(NumberOfPieces){
-        ASSERT_TRUE(NULL, _game.getNumberOfPieces() == 32);
+        ASSERT_TRUE("", _game.getNumberOfPieces() == 32);
     }
     TEST_END
 

@@ -49,9 +49,9 @@ public:
         __Test__ test;
         MQLUNIT_TestResult result;
         test.run(&result);
-        ASSERT_EQUALS(NULL, (uint) 0, result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 0, result.failureCount());
-        ASSERT_TRUE(NULL, test.wasRun());
+        ASSERT_EQUALS("", (uint) 0, result.runCount());
+        ASSERT_EQUALS("", (uint) 0, result.failureCount());
+        ASSERT_TRUE("", test.wasRun());
     }
     TEST_END
 

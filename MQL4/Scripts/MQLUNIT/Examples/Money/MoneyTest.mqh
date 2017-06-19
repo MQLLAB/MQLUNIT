@@ -43,17 +43,17 @@ public:
     MQLUNIT_Examples_Money_MoneyTest(string name) : MQLUNIT_TestCase(name) {};
 
     MQLUNIT_START
-    
+
         //----------------------------------------
-    
+
     TEST_START(Constructor) {
         const string currencyFF =  "FF";
         const double longNumber = 1234.5678;
 
         MQLUNIT_Examples_Money_Money money(longNumber, currencyFF);
 
-        ASSERT_EQUALS(NULL, longNumber, money.getAmount());
-        ASSERT_EQUALS(NULL, currencyFF, money.getCurrency());
+        ASSERT_EQUALS("", longNumber, money.getAmount());
+        ASSERT_EQUALS("", currencyFF, money.getCurrency());
     }
     TEST_END
 
@@ -65,11 +65,11 @@ public:
 
         MQLUNIT_Examples_Money_Money money(123, "FF");
         money += money12FF;
-        
+
         ASSERT_EQUALS("Add should work", expectedMoney, money);
     }
     TEST_END
-    
+
     //----------------------------------------
 
     TEST_START(Equal) {
@@ -84,15 +84,15 @@ public:
         ASSERT_TRUE("!= currency and != amount", money12USD != money123FF);
     }
     TEST_END
-    
+
     //----------------------------------------
 
     TEST_START(Throw) {
         MQLUNIT_Examples_Money_Money money123FF(123, "FF");
         MQLUNIT_Examples_Money_Money money( 123, "USD" );
-        
+
         bool exceptionThrown = false;
-        
+
         MQLLIB_TRY {
             money += money123FF;
         } MQLLIB_CATCH(MQLUNIT_INCOMPATIBLE_MONIES) {
@@ -103,7 +103,7 @@ public:
         ASSERT_TRUE("Must throw an exception", exceptionThrown);
     }
     TEST_END
-        
+
     //----------------------------------------
 
     MQLUNIT_END

@@ -78,6 +78,8 @@ public:
 
     /// @brief Runs the test suite.
     /// @param result : collects the results of executing a test suite
+    /// @param inherited : set to true to tell the test it has been inherited
+    /// from and is run by a child test
     /// @see #MQLUNIT_TestResult
     virtual void run(MQLUNIT_TestResult* result, bool inherited = false);
 };

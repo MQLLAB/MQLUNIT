@@ -59,8 +59,8 @@ public:
         MQLUNIT_TestSuite suite;
         suite.addTest(new __Success__());
         suite.run(_result);
-        ASSERT_EQUALS(NULL, (uint) 1, _result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 0, _result.failureCount());
+        ASSERT_EQUALS("", (uint) 1, _result.runCount());
+        ASSERT_EQUALS("", (uint) 0, _result.failureCount());
     }
     TEST_END
 
@@ -70,8 +70,8 @@ public:
         MQLUNIT_TestSuite suite;
         suite.addTest(new __InheritedTestCase__());
         suite.run(_result);
-        ASSERT_EQUALS(NULL, (uint) 2, _result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 0, _result.failureCount());
+        ASSERT_EQUALS("", (uint) 2, _result.runCount());
+        ASSERT_EQUALS("", (uint) 0, _result.failureCount());
     }
     TEST_END
 
@@ -81,8 +81,8 @@ public:
         MQLUNIT_TestSuite suite;
         suite.addTest(new __NoTestCases__());
         suite.run(_result);
-        ASSERT_EQUALS(NULL, (uint) 0, _result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 0, _result.failureCount());
+        ASSERT_EQUALS("", (uint) 0, _result.runCount());
+        ASSERT_EQUALS("", (uint) 0, _result.failureCount());
     }
     TEST_END
 
@@ -97,8 +97,8 @@ public:
         suite2.addTest(&suite1);
 
         suite2.run(_result);
-        ASSERT_EQUALS(NULL, (uint) 2, _result.runCount());
-        ASSERT_EQUALS(NULL, (uint) 1, _result.failureCount());
+        ASSERT_EQUALS("", (uint) 2, _result.runCount());
+        ASSERT_EQUALS("", (uint) 1, _result.failureCount());
     }
     TEST_END
 

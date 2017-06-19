@@ -57,7 +57,7 @@ public:
         Print(result == 6.0);
 
         // forced failure result == 5.0
-		ASSERT_TRUE(NULL, result == 6.0);
+		ASSERT_TRUE("", result == 6.0);
     }
     TEST_END
 

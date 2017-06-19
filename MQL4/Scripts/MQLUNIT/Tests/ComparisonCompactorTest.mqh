@@ -49,7 +49,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(0, "b", "c");
 		string failure = compactor.compact("a");
         ASSERT_TRUE(
-            NULL, "a: expected:<[b]> but was:<[c]>" == failure
+            "", "a: expected:<[b]> but was:<[c]>" == failure
         );
     }
     TEST_END
@@ -60,7 +60,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(1, "ba", "bc");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<b[a]> but was:<b[c]>", failure
+            "", "expected:<b[a]> but was:<b[c]>", failure
         );
     }
     TEST_END
@@ -71,7 +71,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(1, "ab", "cb");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<[a]b> but was:<[c]b>", failure
+            "", "expected:<[a]b> but was:<[c]b>", failure
         );
     }
     TEST_END
@@ -82,7 +82,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(1, "ab", "ab");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<ab> but was:<ab>", failure
+            "", "expected:<ab> but was:<ab>", failure
         );
     }
     TEST_END
@@ -93,7 +93,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(0, "abc", "adc");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<...[b]...> but was:<...[d]...>", failure
+            "", "expected:<...[b]...> but was:<...[d]...>", failure
         );
     }
     TEST_END
@@ -104,7 +104,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(1, "abc", "adc");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<a[b]c> but was:<a[d]c>", failure
+            "", "expected:<a[b]c> but was:<a[d]c>", failure
         );
     }
     TEST_END
@@ -115,7 +115,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(1, "abcde", "abfde");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<...b[c]d...> but was:<...b[f]d...>", failure
+            "", "expected:<...b[c]d...> but was:<...b[f]d...>", failure
         );
     }
     TEST_END
@@ -137,7 +137,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(0, "bc", "abc");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<[]...> but was:<[a]...>", failure
+            "", "expected:<[]...> but was:<[a]...>", failure
         );
     }
     TEST_END
@@ -148,7 +148,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(2, "bc", "abc");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<[]bc> but was:<[a]bc>", failure
+            "", "expected:<[]bc> but was:<[a]bc>", failure
         );
     }
     TEST_END
@@ -159,7 +159,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(0, "abc", "abbc");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<...[]...> but was:<...[b]...>", failure
+            "", "expected:<...[]...> but was:<...[b]...>", failure
         );
     }
     TEST_END
@@ -170,7 +170,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(2, "abc", "abbc");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<ab[]c> but was:<ab[b]c>", failure
+            "", "expected:<ab[]c> but was:<ab[b]c>", failure
         );
     }
     TEST_END
@@ -181,7 +181,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(0, "abcdde", "abcde");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<...[d]...> but was:<...[]...>", failure
+            "", "expected:<...[d]...> but was:<...[]...>", failure
         );
     }
     TEST_END
@@ -192,7 +192,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(2, "abcdde", "abcde");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<...cd[d]e> but was:<...cd[]e>", failure
+            "", "expected:<...cd[d]e> but was:<...cd[]e>", failure
         );
     }
     TEST_END
@@ -203,7 +203,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(0, "a", NULL);
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<a> but was:<null>", failure
+            "", "expected:<a> but was:<null>", failure
         );
     }
     TEST_END
@@ -225,7 +225,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(0, NULL, "a");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<null> but was:<a>", failure
+            "", "expected:<null> but was:<a>", failure
         );
     }
     TEST_END
@@ -236,7 +236,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(2, NULL, "a");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<null> but was:<a>", failure
+            "", "expected:<null> but was:<a>", failure
         );
     }
     TEST_END
@@ -247,7 +247,7 @@ public:
         MQLUNIT_ComparisonCompactor compactor(10, "S&P500", "0");
         string failure = compactor.compact(NULL);
         ASSERT_EQUALS(
-            NULL, "expected:<[S&P50]0> but was:<[]0>", failure
+            "", "expected:<[S&P50]0> but was:<[]0>", failure
         );
     }
     TEST_END
