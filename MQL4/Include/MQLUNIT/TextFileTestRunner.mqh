@@ -91,8 +91,9 @@ public:
 
     /// @brief Run a test and output the result to the console.
     /// @param test : a test to run
+    /// @return true, if all tests succeeded, false if there were failures
     /// @see MQLUNIT_Test
-    void run(MQLUNIT_Test* test);
+    bool run(MQLUNIT_Test* test);
 
     // }
 
@@ -141,7 +142,7 @@ void MQLUNIT_TextFileTestRunner::addFailure(MQLUNIT_TestFailure* failure) {
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TextFileTestRunner::run(MQLUNIT_Test* test) {
+bool MQLUNIT_TextFileTestRunner::run(MQLUNIT_Test* test) {
     MQLUNIT_TestResult result;
     result.addListener(&this);
 
@@ -178,6 +179,8 @@ void MQLUNIT_TextFileTestRunner::run(MQLUNIT_Test* test) {
             StringFormat("OK (%i tests)\r\n", result.runCount())
         );
     }
+
+    return _failures.size() == 0;
 }
 
 //-----------------------------------------------------------------------------

@@ -1,9 +1,9 @@
-/// @file   TestRunner.mqh
+/// @file   TestRunnerTest.mqh
 /// @author Copyright 2017, Eneset Group Trust
-/// @brief  MQLUNIT TestRunner class definition.
+/// @brief  Test case for classes that implement MQLUNIT_TestRunner.
 
 //-----------------------------------------------------------------------------
-// Copyright 2017, Eneset Group Trust
+// Copyright 2017 Eneset Group Trust
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -26,39 +26,55 @@
 
 #property strict
 
-#ifndef MQLUNIT_TESTRUNNER_MQH
-#define MQLUNIT_TESTRUNNER_MQH
+#ifndef SCRIPTS_MQLUNIT_TESTS_TESTRUNNERTEST_MQH
+#define SCRIPTS_MQLUNIT_TESTS_TESTRUNNERTEST_MQH
 
-#include "Test.mqh"
-#include "TestListener.mqh"
+#include <MQLLIB/Lang/Pointer.mqh>
+#include <MQLUNIT/MQLUNIT.mqh>
+
+#include "TestData.mqh"
 
 //-----------------------------------------------------------------------------
 
-/// @brief Base class for all test runners.
-/// @see MQLUNIT_TestListener
-class MQLUNIT_TestRunner : public MQLUNIT_TestListener {
+template<typename T>
+class MQLUNIT_Tests_TestRunnerTest : public MQLUNIT_TestCase {
+private:
+    T* _runner;
 public:
-    /// @brief Destructor
-    virtual ~MQLUNIT_TestRunner() {};
+    MQLUNIT_Tests_TestRunnerTest() : MQLUNIT_TestCase(typename(this)) {};
+    MQLUNIT_Tests_TestRunnerTest(string name) : MQLUNIT_TestCase(name) {};
 
-    /// @brief Run a test and output the result.
-    /// @param test : a test to run
-    /// @return true, if all tests succeeded, false if there were failures
-    /// @see MQLUNIT_Test
-    virtual bool run(MQLUNIT_Test* test) = 0;
 
-protected:
-    string failureCountFormat(uint count) const;
-};
+    void setUp() {
+        _runner = new T("MQLUNIT/Tests/MQLUNIT_Tests_TestRunnerTest.out");
+    };
 
-//-----------------------------------------------------------------------------
+    void tearDown() {
+        MQLLIB_Lang_SafeDelete(_runner);
+        FileDelete("MQLUNIT/Tests/MQLUNIT_Tests_TestRunnerTest.out");
+        FolderDelete("MQLUNIT/Tests");
+    };
 
-string MQLUNIT_TestRunner::failureCountFormat(uint count) const {
-    if (count == 1) {
-        return "There was %i failure:";
+    MQLUNIT_START
+
+    //----------------------------------------
+
+    TEST_START(TestSuccess) {
+        __Success__ test;
+        ASSERT_TRUE("Test must succeed", _runner.run(&test));
     }
-    return "There were %i failures:";
-}
+    TEST_END
+
+    //----------------------------------------
+
+    TEST_START(TestFailiure) {
+        __Failure__ test;
+        ASSERT_TRUE("Test must fail", !_runner.run(&test));
+    }
+    TEST_END
+
+    MQLUNIT_END
+};
 
 //-----------------------------------------------------------------------------
 

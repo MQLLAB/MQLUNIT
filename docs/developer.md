@@ -3,7 +3,7 @@
 ## Assertion Framework
 
 Although MQL4 is pretty close syntactically to C++, it lacks a lot of C++
-features suck as multiple inheritance, runtime type information (RTTI) and
+features such as multiple inheritance, runtime type information (RTTI) and
 exceptions.
 
 Traditionally, in JUnit and CppUnit assertion failures are thrown as exceptions.

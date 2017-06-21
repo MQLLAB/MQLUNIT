@@ -95,8 +95,9 @@ public:
 
     /// @brief Run a test and output the result to the console.
     /// @param test : a test to run
+    /// @return true, if all tests succeeded, false if there were failures
     /// @see MQLUNIT_Test
-    void run(MQLUNIT_Test* test);
+    bool run(MQLUNIT_Test* test);
 
     // }
 };
@@ -143,7 +144,7 @@ void MQLUNIT_XMLTestRunner::addFailure(MQLUNIT_TestFailure* failure) {
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_XMLTestRunner::run(MQLUNIT_Test* test) {
+bool MQLUNIT_XMLTestRunner::run(MQLUNIT_Test* test) {
     MQLUNIT_TestResult result;
     result.addListener(&this);
 
@@ -165,6 +166,8 @@ void MQLUNIT_XMLTestRunner::run(MQLUNIT_Test* test) {
     file.Open(_file, FILE_WRITE | FILE_TXT);
     file.WriteString(_xml.toString());
     file.Close();
+
+    return _failures.size() == 0;
 }
 
 //-----------------------------------------------------------------------------

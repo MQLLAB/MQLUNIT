@@ -88,8 +88,9 @@ public:
 
     /// @brief Run a test and output the result to the console.
     /// @param test : a test to run
+    /// @return true, if all tests succeeded, false if there were failures
     /// @see MQLUNIT_Test
-    void run(MQLUNIT_Test* test);
+    bool run(MQLUNIT_Test* test);
 
     // }
 
@@ -161,7 +162,7 @@ void MQLUNIT_TerminalTestRunner::printFailure(
 
 //-----------------------------------------------------------------------------
 
-void MQLUNIT_TerminalTestRunner::run(MQLUNIT_Test* test) {
+bool MQLUNIT_TerminalTestRunner::run(MQLUNIT_Test* test) {
     MQLUNIT_TestResult result;
     result.addListener(&this);
     Print("");
@@ -189,6 +190,8 @@ void MQLUNIT_TerminalTestRunner::run(MQLUNIT_Test* test) {
         PrintFormat("OK (%i tests)", result.runCount());
         Print("");
     }
+
+    return _failures.size() == 0;
 }
 
 //-----------------------------------------------------------------------------
