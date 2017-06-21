@@ -1,8 +1,0 @@
-* Implement decorator interface
-* Implement decorator for repeated test case
-* Implement decorator for common setUp() and tearDown()
-* Create an a test runner that produces JUnit compatible XML output
-* Create a generic test runner that uses a specific outputter
-* Make the build and test run in AppVeyor
-* Add AppVeyor setup instructions to the cookbook
-* Make sure it's not possible to have duplicate test names in the same TestCase
