@@ -20,6 +20,7 @@ build_script:
 test_script:
   - test.cmd
   - dir MQL4\Files\MQLUNIT
+  - ps: if (-not (Test-Path "$pwd\MQL4\Files\MQLUNIT\SUCCESS")) { exit -1 }
 
 #after_test:
 #  - doxygen.exe --version
