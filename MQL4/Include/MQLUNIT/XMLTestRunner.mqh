@@ -100,13 +100,28 @@ public:
     bool run(MQLUNIT_Test* test);
 
     // }
+
+private:
+    string getFileName(string testName);
+
 };
+
+//-----------------------------------------------------------------------------
+
+string MQLUNIT_XMLTestRunner::getFileName(string testName) {
+    string result = testName;
+    int tail = StringFind(testName, "<");
+    if (tail != -1) {
+        result = StringSubstr(testName, 0, tail);
+    }
+    return StringConcatenate(result, ".mq4");
+}
 
 //-----------------------------------------------------------------------------
 
 void MQLUNIT_XMLTestRunner::startSuite(MQLUNIT_Test* test) {
     _currentSuite = new MQLLIB_XML_Element("testsuite");
-    _currentSuite.addAttribute("name", test.getName());
+    _currentSuite.addAttribute("name", getFileName(test.getName()));
 }
 
 //-----------------------------------------------------------------------------
@@ -120,6 +135,7 @@ void MQLUNIT_XMLTestRunner::endSuite(MQLUNIT_Test* test) {
 
 void MQLUNIT_XMLTestRunner::startTest(MQLUNIT_Test* test, const string name) {
     _currentTest = new MQLLIB_XML_Element("testcase");
+    _currentTest.addAttribute("classname", test.getName());
     _currentTest.addAttribute("name", name);
 }
 
