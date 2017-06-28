@@ -44,6 +44,7 @@
 
 /// @brief Test runner that outputs results to the XML file compatible with
 /// JUnit report analysers.
+/// @note This runner's output is optimised for AppVeyor cloud CI.
 /// @see MQLUNIT_TestRunner
 class MQLUNIT_XMLTestRunner : public MQLUNIT_TestRunner {
 private:
