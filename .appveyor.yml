@@ -11,6 +11,7 @@ cache:
 
 install:
   - ps: if (-not (Test-Path "$pwd\mt-1090.zip")) { (New-Object Net.WebClient).DownloadFile("https://s3.amazonaws.com/mqllab/terminal/mt4-1090.zip", "$pwd\mt-1090.zip") }
+  - ps: Add-Type -Path "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.IO.Compression.FileSystem.dll"
   - ps: [System.IO.Compression.ZipFile]::ExtractToDirectory("$pwd\mt-1090.zip", "$pwd")
   - dir
 
