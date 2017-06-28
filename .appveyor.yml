@@ -1,5 +1,19 @@
 version: '1.0.0.{build}'
-#install:
+
+branches:
+  except:
+    - gh-pages
+
+environment:
+
+cache:
+  - mt4-1090.zip
+
+install:
+  - ps: if (-not (Test-Path "$pwd\mt-1090.zip")) { (New-Object Net.WebClient).DownloadFile("https://s3.amazonaws.com/mqllab/terminal/mt4-1090.zip", "$pwd\mt-1090.zip") }
+  - ps: [System.IO.Compression.ZipFile]::ExtractToDirectory("$pwd\mt-1090.zip", "$pwd")
+  - dir
+
 #  - appveyor-retry choco install doxygen.portable
 #  - appveyor-retry choco install graphviz.portable
 build_script:
