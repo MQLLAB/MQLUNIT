@@ -51,7 +51,7 @@ void OnStart() {
     file.Delete("MQLUNIT/MQLUNITTest.xml");
     file.Delete("MQLUNIT/SUCCESS");
 
-    MQLUNIT_TestSuite suite;
+    MQLUNIT_TestSuite suite("MQLUNITTest");
     suite.addTest(new MQLUNIT_Tests_AssertTest());
     suite.addTest(new MQLUNIT_Tests_DoublePrecisionAssertTest());
     suite.addTest(new MQLUNIT_Tests_ComparisonCompactorTest());

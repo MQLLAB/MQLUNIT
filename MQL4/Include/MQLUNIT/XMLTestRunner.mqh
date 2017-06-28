@@ -114,7 +114,8 @@ string MQLUNIT_XMLTestRunner::getFileName(string testName) {
     if (tail != -1) {
         result = StringSubstr(testName, 0, tail);
     }
-    return StringConcatenate(result, ".mq4");
+    StringReplace(result, "_", "\\");
+    return result;
 }
 
 //-----------------------------------------------------------------------------
