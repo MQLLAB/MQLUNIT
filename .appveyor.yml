@@ -12,16 +12,13 @@ cache:
 install:
   - ps: if (-not (Test-Path "$pwd\mt-1090.zip")) { (New-Object Net.WebClient).DownloadFile("https://s3.amazonaws.com/mqllab/terminal/mt4-1090.zip", "$pwd\mt-1090.zip") }
   - 7z x mt-1090.zip
-  - dir
-
-#  - appveyor-retry choco install doxygen.portable
-#  - appveyor-retry choco install graphviz.portable
 
 build_script:
   - echo "Compiling MQLUNITTest.mq4..."
   - compile.cmd MQL4\Scripts\MQLUNIT\Tests\MQLUNITTest
 
 test_script:
+  - terminal.exe /portable config\test.ini
   - dir MQL4\Files\MQLUNIT
 
 #after_test:
