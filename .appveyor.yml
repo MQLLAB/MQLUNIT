@@ -19,8 +19,7 @@ install:
 
 build_script:
   - echo "Compiling MQLUNITTest.mq4..."
-  - metaeditor.exe /portable /compile:MQL4\Scripts\MQLUNIT\Tests\MQLUNITTest.mq4 /log
-  - type MQL4\Scripts\MQLUNIT\Tests\MQLUNITTest.log
+  - compile.cmd MQL4\Scripts\MQLUNIT\Tests\MQLUNITTest
 
 test_script:
   - dir MQL4\Files\MQLUNIT
