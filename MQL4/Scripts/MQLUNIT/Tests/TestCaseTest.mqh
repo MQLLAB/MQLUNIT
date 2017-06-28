@@ -49,7 +49,7 @@ public:
         MQLUNIT_TestResult result;
         test.run(&result);
         ASSERT_EQUALS("", (uint) 1, result.runCount());
-        ASSERT_EQUALS("", (uint) 1, result.failureCount());
+        ASSERT_EQUALS("", (uint) 0, result.failureCount());
     }
     TEST_END
 
