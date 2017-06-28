@@ -24,4 +24,4 @@ on_finish:
   - echo https://ci.appveyor.com/api/testresults/junit/%APPVEYOR_JOB_ID%
   - curl -i -X POST -H "Content-Type: multipart/form-data" -F "data=@MQL4\Files\MQLUNIT\MQLUNITTest.xml" https://ci.appveyor.com/api/testresults/junit/%APPVEYOR_JOB_ID%
 #  - ps: (New-Object Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", "$pwd\MQL4\Files\MQLUNIT\MQLUNITTest.xml")
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
