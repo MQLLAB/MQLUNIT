@@ -4,8 +4,6 @@ branches:
   except:
     - gh-pages
 
-#environment:
-
 cache:
   - mt-1090.zip
 
@@ -22,7 +20,6 @@ test_script:
   - dir MQL4\Files\MQLUNIT
   - ps: if (-not (Test-Path "$pwd\MQL4\Files\MQLUNIT\SUCCESS")) { exit -1 }
 
-#after_test:
-#  - doxygen.exe --version
-#on_finish:
+on_finish:
+  - (New-Object Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\MQL4\Files\MQLUNIT\MQLUNITTest.xml))
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
