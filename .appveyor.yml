@@ -16,10 +16,15 @@ install:
 
 #  - appveyor-retry choco install doxygen.portable
 #  - appveyor-retry choco install graphviz.portable
+
 build_script:
-  - echo "Build..."
+  - echo "Compiling MQLUNITTest.mq4..."
+  - metaeditor.exe /portable /compile:MQL4\Scripts\MQLUNIT\Tests\MQLUNITTest.mq4 /log
+  - type MQL4\Scripts\MQLUNIT\Tests\MQLUNITTest.log
+
 test_script:
-  - echo "Test..."
+  - dir MQL4\Files\MQLUNIT
+
 #after_test:
 #  - doxygen.exe --version
 #on_finish:
