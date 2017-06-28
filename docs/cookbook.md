@@ -297,7 +297,7 @@ Build script uses the presence of this file to determine whether the test
 run was successful or not.
 
 Test result in JUnit compatible XML formar are uploaded to AppVeyor and are
-displayed on [the build page](https://ci.appveyor.com/project/mqllab/mqlunit).
+displayed on [the build page](https://ci.appveyor.com/project/mqllab/mqlunit/build/tests).
 
 ---
 
