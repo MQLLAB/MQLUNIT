@@ -18,7 +18,7 @@ build_script:
   - compile.cmd MQL4\Scripts\MQLUNIT\Tests\MQLUNITTest
 
 test_script:
-  - terminal.exe /portable config\test.ini
+  - start terminal.exe /portable config\test.ini
   - dir MQL4\Files\MQLUNIT
 
 #after_test:
