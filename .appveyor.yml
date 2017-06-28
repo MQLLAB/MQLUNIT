@@ -21,5 +21,5 @@ test_script:
   - ps: if (-not (Test-Path "$pwd\MQL4\Files\MQLUNIT\SUCCESS")) { exit -1 }
 
 on_finish:
-  - (New-Object Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\MQL4\Files\MQLUNIT\MQLUNITTest.xml))
+  - ps: (New-Object Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\MQL4\Files\MQLUNIT\MQLUNITTest.xml))
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
