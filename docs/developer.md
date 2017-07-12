@@ -8,7 +8,7 @@ exceptions.
 
 Traditionally, in JUnit and CppUnit assertion failures are thrown as exceptions.
 Unfortunately this can't be done in MQL4. Although
-[MQLLIB](https://mqllib.github.io/MQLLAB/MQLLIB) includes some rudementary
+[MQLLIB](https://mqllab.github.io/MQLLIB) includes some rudementary
 exception emulation layer, it is unsuitable for our purposes here.
 
 The following convention, therefore, has been established. Assertion methods
