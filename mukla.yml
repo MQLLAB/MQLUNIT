@@ -17,13 +17,13 @@ authors:
   - name: Eneset Group Trust
     homepage: https://www.eneset.com
 license: MIT
+repository:
+  type: git
+  url: git@github.com:MQLLAB/MQLUNIT.git
 files:
   - MQL4/Include/MQLLIB/**/*.mqh
   - MQL4/Include/MQLUNIT/**/*.mqh
   - MQL4/Scripts/MQLUNIT/Examples/**/*.mq*
-repository:
-  type: git
-  url: git@github.com:MQLLAB/MQLUNIT.git
 require:
   MQLLAB/MQLLIB-Lang: master
   MQLLAB/MQLLIB-Utils: master
