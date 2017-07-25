@@ -1,0 +1,7 @@
+<map id="MQLUNIT_TestRunner" name="MQLUNIT_TestRunner">
+<area shape="rect" id="node5" href="$classMQLUNIT__ConsoleTestRunner.html" title="Test runner that outputs results to the text console. " alt="" coords="423,5,628,35"/>
+<area shape="rect" id="node7" href="$classMQLUNIT__TerminalTestRunner.html" title="Test runner that outputs results to the &quot;Experts&quot; log window of MetaTrader terminal. " alt="" coords="423,59,628,88"/>
+<area shape="rect" id="node9" href="$classMQLUNIT__TextFileTestRunner.html" title="Test runner that outputs results to the text file. " alt="" coords="424,112,627,141"/>
+<area shape="rect" id="node11" href="$classMQLUNIT__XMLTestRunner.html" title="Test runner that outputs results to the XML file compatible with JUnit report analysers. " alt="" coords="433,165,617,195"/>
+<area shape="rect" id="node2" href="$classMQLUNIT__TestListener.html" title="A Listener for test progress. " alt="" coords="7,85,167,115"/>
+</map>

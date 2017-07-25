@@ -1,0 +1,8 @@
+<map id="MQL4/Include/MQLUNIT/ConsoleTestRunner.mqh" name="MQL4/Include/MQLUNIT/ConsoleTestRunner.mqh">
+<area shape="rect" id="node7" href="$Constants_8mqh.html" title="Definition of MQLUNIT constants. " alt="" coords="633,101,743,131"/>
+<area shape="rect" id="node9" href="$TestFailure_8mqh.html" title="MQLUNIT TestFailure class definition. " alt="" coords="100,275,215,304"/>
+<area shape="rect" id="node13" href="$TestResult_8mqh.html" title="MQLUNIT TestResult class definition. " alt="" coords="148,101,263,131"/>
+<area shape="rect" id="node22" href="$TestRunner_8mqh.html" title="MQLUNIT TestRunner class definition. " alt="" coords="287,101,404,131"/>
+<area shape="rect" id="node11" href="$Test_8mqh.html" title="MQLUNIT Test class definition. " alt="" coords="251,352,328,381"/>
+<area shape="rect" id="node18" href="$TestListener_8mqh.html" title="MQLUNIT TestListener interface definition. " alt="" coords="289,188,412,217"/>
+</map>

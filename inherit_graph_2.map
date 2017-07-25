@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classMQLUNIT__Test.html" title="Base class for all tests. " alt="" coords="5,32,120,61"/>
+<area shape="rect" id="node3" href="$classMQLUNIT__TestCase.html" title="A test case defines the fixture to run multiple tests. " alt="" coords="168,5,315,35"/>
+<area shape="rect" id="node5" href="$classMQLUNIT__TestSuite.html" title="Runs a collection of test cases. " alt="" coords="169,59,313,88"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="MQL4/Include/MQLUNIT/Test.mqh" name="MQL4/Include/MQLUNIT/Test.mqh">
+<area shape="rect" id="node3" href="$TestFailure_8mqh.html" title="MQLUNIT TestFailure class definition. " alt="" coords="507,102,672,149"/>
+<area shape="rect" id="node7" href="$MQLUNIT_8mqh.html" title="Single include file for the MQLUNIT library. " alt="" coords="561,582,727,629"/>
+<area shape="rect" id="node9" href="$TestResult_8mqh.html" title="MQLUNIT TestResult class definition. " alt="" coords="724,294,889,341"/>
+<area shape="rect" id="node15" href="$TestCase_8mqh.html" title="MQLUNIT TestCase class definition. " alt="" coords="1021,390,1187,437"/>
+<area shape="rect" id="node18" href="$TestSuite_8mqh.html" title="MQLUNIT TestSuite class definition. " alt="" coords="901,486,1067,533"/>
+<area shape="rect" id="node29" href="$TestListener_8mqh.html" title="MQLUNIT TestListener interface definition. " alt="" coords="652,198,817,245"/>
+<area shape="rect" id="node32" href="$TestRunner_8mqh.html" title="MQLUNIT TestRunner class definition. " alt="" coords="361,294,527,341"/>
+<area shape="rect" id="node5" href="$ConsoleTestRunner_8mqh.html" title="MQLUNIT ConsoleTestRunner class. " alt="" coords="480,390,651,437"/>
+<area shape="rect" id="node12" href="$TerminalTestRunner_8mqh.html" title="MQLUNIT TerminalTestRunner class definition. " alt="" coords="232,390,405,437"/>
+<area shape="rect" id="node23" href="$TextFileTestRunner_8mqh.html" title="MQLUNIT TextFileTestRunner class. " alt="" coords="675,390,845,437"/>
+<area shape="rect" id="node26" href="$XMLTestRunner_8mqh.html" title="MQLUNIT XMLTestRunner class definition. " alt="" coords="43,390,208,437"/>
+</map>

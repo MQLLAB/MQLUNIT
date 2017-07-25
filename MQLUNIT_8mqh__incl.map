@@ -1,0 +1,16 @@
+<map id="MQL4/Include/MQLUNIT/MQLUNIT.mqh" name="MQL4/Include/MQLUNIT/MQLUNIT.mqh">
+<area shape="rect" id="node3" href="$Assert_8mqh.html" title="MQLUNIT_Assert class definition. " alt="" coords="157,101,245,131"/>
+<area shape="rect" id="node7" href="$Constants_8mqh.html" title="Definition of MQLUNIT constants. " alt="" coords="355,275,465,304"/>
+<area shape="rect" id="node9" href="$ComparisonCompactor_8mqh.html" title="Definition of MQLUNIT ComparisonCompactor class. " alt="" coords="233,188,417,217"/>
+<area shape="rect" id="node13" href="$ConsoleTestRunner_8mqh.html" title="MQLUNIT ConsoleTestRunner class. " alt="" coords="1145,188,1310,217"/>
+<area shape="rect" id="node20" href="$TestFailure_8mqh.html" title="MQLUNIT TestFailure class definition. " alt="" coords="1303,448,1418,477"/>
+<area shape="rect" id="node22" href="$Test_8mqh.html" title="MQLUNIT Test class definition. " alt="" coords="1677,525,1754,555"/>
+<area shape="rect" id="node24" href="$TestResult_8mqh.html" title="MQLUNIT TestResult class definition. " alt="" coords="1505,275,1619,304"/>
+<area shape="rect" id="node33" href="$TestRunner_8mqh.html" title="MQLUNIT TestRunner class definition. " alt="" coords="1014,275,1131,304"/>
+<area shape="rect" id="node38" href="$TerminalTestRunner_8mqh.html" title="MQLUNIT TerminalTestRunner class definition. " alt="" coords="542,188,710,217"/>
+<area shape="rect" id="node46" href="$TestCase_8mqh.html" title="MQLUNIT TestCase class definition. " alt="" coords="1950,188,2057,217"/>
+<area shape="rect" id="node53" href="$TestSuite_8mqh.html" title="MQLUNIT TestSuite class definition. " alt="" coords="1733,101,1839,131"/>
+<area shape="rect" id="node64" href="$TextFileTestRunner_8mqh.html" title="MQLUNIT TextFileTestRunner class. " alt="" coords="955,188,1121,217"/>
+<area shape="rect" id="node73" href="$XMLTestRunner_8mqh.html" title="MQLUNIT XMLTestRunner class definition. " alt="" coords="734,188,881,217"/>
+<area shape="rect" id="node29" href="$TestListener_8mqh.html" title="MQLUNIT TestListener interface definition. " alt="" coords="1505,361,1627,391"/>
+</map>
